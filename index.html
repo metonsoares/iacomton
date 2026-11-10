@@ -3,19 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>IA com Ton</title>
-<link rel="stylesheet" href="estilo.css">
+<title>IA com Ton · Inteligência artificial na prática, sem complicação</title>
+<meta name="description" content="IA prática para iniciantes e empreendedores: ChatGPT, Claude, Google Drive, agenda e e-mail com IA, passo a passo. Todos os posts do @iacomton, vídeos do YouTube e aulas grátis em PDF.">
+<link rel="canonical" href="https://iacomton.com.br/">
+<meta name="theme-color" content="#0A1430">
+<meta name="facebook-domain-verification" content="00gy63zxaoi7wynfyb6hnn8qmx62dt">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IA com Ton">
+<meta property="og:title" content="IA com Ton · Inteligência artificial na prática">
+<meta property="og:description" content="Tutoriais curtos de IA para o dia a dia: posts, vídeos e aulas grátis em PDF.">
+<meta property="og:url" content="https://iacomton.com.br/">
+<meta property="og:image" content="https://iacomton.com.br/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230A1430'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='900' font-size='26' fill='%235CC8FF' text-anchor='middle'%3EIA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://xhqzakikatookphvjewy.supabase.co">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"Organization","@id":"https://iacomton.com.br/#org","name":"IA com Ton","url":"https://iacomton.com.br/","logo":"https://iacomton.com.br/og.png",
+  "sameAs":["https://www.instagram.com/iacomton/","https://www.youtube.com/channel/UCeNp02Uo-C1ax9mjizgqTrA"]},
+ {"@type":"WebSite","@id":"https://iacomton.com.br/#site","url":"https://iacomton.com.br/","name":"IA com Ton","inLanguage":"pt-BR","publisher":{"@id":"https://iacomton.com.br/#org"}}
+]}
+</script>
+<style>
+  :root{--navy:#0A1430;--azul:#1E6BFF;--ciano:#5CC8FF;--texto:#16203A;--suave:#5B6478;--linha:#DCE3F0;--fundo:#F6F8FC;--card:#fff;--yt:#E62117}
+  @media (prefers-color-scheme:dark){:root{--texto:#E8EEFC;--suave:#A9B6D3;--linha:#22305A;--fundo:#070D1F;--card:#0F1A38}}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--fundo);color:var(--texto);font:16px/1.55 "Segoe UI",Roboto,Arial,sans-serif}
+  a{color:var(--azul)}
+  .largura{max-width:1080px;margin:0 auto;padding:0 16px}
+  .topo{background:radial-gradient(120% 90% at 90% 0%,#1B3A86 0%,var(--navy) 60%,#060C1F 100%);color:#fff;padding:24px 0 48px}
+  .marca{font-weight:900;letter-spacing:2px;font-size:14px;margin:0 0 40px}
+  .marca b{color:var(--ciano)}
+  h1{font-size:44px;line-height:1.08;margin:0 0 14px;max-width:720px}
+  h1 span{color:var(--ciano)}
+  .sub{color:#C9D6F5;font-size:19px;margin:0 0 26px;max-width:640px}
+  .acoes{display:flex;gap:12px;flex-wrap:wrap}
+  .botao{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:12px;font-weight:800;text-decoration:none;color:#fff}
+  .botao svg{width:22px;height:22px;flex:none}
+  .yt{background:var(--yt)}
+  .ig{background:linear-gradient(45deg,#F58529,#DD2A7B 55%,#8134AF)}
+  .botao:focus-visible{outline:3px solid #fff;outline-offset:2px}
+  .aula{margin:-28px auto 0;position:relative}
+  .aula a{display:flex;gap:18px;align-items:center;background:var(--card);border:1px solid var(--linha);border-radius:18px;padding:18px 20px;text-decoration:none;color:var(--texto);box-shadow:0 14px 40px rgba(10,20,48,.12)}
+  .aula .selo{flex:none;background:var(--azul);color:#fff;border-radius:10px;padding:8px 12px;font-weight:800;font-size:13px;letter-spacing:1px}
+  .aula strong{display:block;font-size:18px}
+  .aula span.seta{margin-left:auto;font-weight:800;color:var(--azul);white-space:nowrap}
+  main{padding:40px 0 20px}
+  h2{font-size:26px;margin:0 0 6px}
+  .intro{color:var(--suave);margin:0 0 18px}
+  .filtros{display:flex;gap:8px;margin:0 0 20px;flex-wrap:wrap}
+  .filtros button{font:inherit;font-weight:700;font-size:14px;padding:8px 16px;border-radius:999px;border:1.5px solid var(--linha);background:var(--card);color:var(--texto);cursor:pointer}
+  .filtros button[aria-pressed=true]{background:var(--azul);border-color:var(--azul);color:#fff}
+  .grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;list-style:none;padding:0;margin:0}
+  .post a{display:block;height:100%;background:var(--card);border:1px solid var(--linha);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--texto)}
+  .post a:hover{border-color:var(--azul)}
+  .thumb{position:relative;aspect-ratio:4/5;background:#0F1A38}
+  .thumb.h{aspect-ratio:16/9}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .rotulo{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:4px 9px;border-radius:999px;color:#fff;background:rgba(10,20,48,.75)}
+  .rotulo.youtube{background:var(--yt)}
+  .post p{margin:12px 14px 4px;font-weight:600;font-size:15px;line-height:1.35}
+  .post time{display:block;margin:0 14px 14px;font-size:13px;color:var(--suave)}
+  .vazio{color:var(--suave)}
+  .rodape{border-top:1px solid var(--linha);margin-top:40px;padding:20px 0 40px;font-size:14px;color:var(--suave)}
+  .rodape a{color:var(--suave)}
+  @media (max-width:640px){
+    h1{font-size:32px}.sub{font-size:17px}
+    .botao{flex:1 1 100%;justify-content:center}
+    .aula a{flex-wrap:wrap}.aula span.seta{margin-left:0}
+  }
+</style>
+<script src="/rastreio.js" defer></script>
 </head>
 <body>
-<main>
-<p class="marca">IA COM <b>TON</b></p>
-<h1>Inteligência artificial na prática</h1>
-<p>Aplicativos, automações, agentes de IA e conexões entre ChatGPT, Claude e as ferramentas do dia a dia. O que funcionou, o que deu errado e o que ainda quero testar.</p>
-<ul class="links">
-<li><a href="https://www.instagram.com/iacomton/">Instagram · @iacomton</a></li>
-<li><a href="https://www.youtube.com/@iacomton">YouTube · IA com Ton</a></li>
-</ul>
-<p class="rodape"><a href="privacidade.html">Privacidade</a> · <a href="termos.html">Termos</a> · <a href="exclusao-de-dados.html">Exclusão de dados</a></p>
+<header class="topo">
+  <div class="largura">
+    <p class="marca">IA COM <b>TON</b></p>
+    <h1>Inteligência artificial <span>na prática</span>, sem complicação</h1>
+    <p class="sub">Tutoriais curtos para usar ChatGPT, Claude e as ferramentas do dia a dia com IA: arquivos, agenda, e-mail e muito mais.</p>
+    <div class="acoes">
+      <a class="botao yt" href="https://www.youtube.com/channel/UCeNp02Uo-C1ax9mjizgqTrA?sub_confirmation=1" rel="noopener" data-evento="youtube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8ZM9.7 15V9l5.8 3-5.8 3Z"/></svg>
+        Inscreva-se no YouTube
+      </a>
+      <a class="botao ig" href="https://www.instagram.com/iacomton/" rel="noopener" data-evento="instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2.2c-2.7 0-3 0-4 .1C4.3 2.4 2.4 4.3 2.3 8c-.1 1-.1 1.3-.1 4s0 3 .1 4c.1 3.7 2 5.6 5.7 5.7 1 .1 1.3.1 4 .1s3 0 4-.1c3.7-.1 5.6-2 5.7-5.7.1-1 .1-1.3.1-4s0-3-.1-4C21.6 4.3 19.7 2.4 16 2.3c-1-.1-1.3-.1-4-.1Zm0 1.8c2.6 0 2.9 0 4 .1 2.6.1 3.8 1.4 3.9 3.9.1 1 .1 1.3.1 4s0 2.9-.1 4c-.1 2.5-1.3 3.8-3.9 3.9-1 .1-1.4.1-4 .1s-2.9 0-4-.1c-2.6-.1-3.8-1.4-3.9-3.9-.1-1-.1-1.4-.1-4s0-2.9.1-4C4.2 5.5 5.4 4.2 8 4.1c1-.1 1.4-.1 4-.1Z"/></svg>
+        Siga @iacomton
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="largura aula" aria-label="Aula grátis">
+  <a href="/aulas/drive.html?origem=site" data-evento="aula_drive">
+    <span class="selo">GRÁTIS</span>
+    <span><strong>Aula em PDF: organize seus arquivos com IA</strong>Google Drive + ChatGPT, passo a passo, com prompts prontos.</span>
+    <span class="seta">Baixar →</span>
+  </a>
+</section>
+
+<main class="largura">
+  <h2>Todos os conteúdos</h2>
+  <p class="intro">Os posts do Instagram e os vídeos do YouTube, do mais novo para o mais antigo.</p>
+  <div class="filtros" role="group" aria-label="Filtrar por rede">
+    <button type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+    <button type="button" data-filtro="instagram" aria-pressed="false">Instagram</button>
+    <button type="button" data-filtro="youtube" aria-pressed="false">YouTube</button>
+  </div>
+  <ul class="grade" id="posts" aria-live="polite">
+    <li class="post" data-rede="youtube"><a href="https://www.youtube.com/watch?v=0qUHPU8XZXg" rel="noopener" target="_blank"><div class="thumb h"><img src="https://i.ytimg.com/vi/0qUHPU8XZXg/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="rotulo youtube">YouTube</span></div><p>Claude Duet: a IA da Anthropic que prepara o seu dia (e só age com a sua aprovação)</p><time datetime="2026-11-04T19:04:15+00:00">04 de nov. de 2026</time></a></li>
+    <li class="post" data-rede="instagram"><a href="https://www.instagram.com/reel/DfUhVCKCZh9/" rel="noopener" target="_blank"><div class="thumb"><span class="rotulo instagram">Reel</span></div><p>🤖 E se a IA preparasse o seu dia antes de você abrir o e-mail?</p><time datetime="2026-11-04T13:07:19+0000">04 de nov. de 2026</time></a></li>
+    <li class="post" data-rede="instagram"><a href="https://www.instagram.com/reel/DfPXz9OjSbB/" rel="noopener" target="_blank"><div class="thumb"><span class="rotulo instagram">Reel</span></div><p>📂 Sua pasta Downloads virou uma bagunça?</p><time datetime="2026-11-02T13:06:59+0000">02 de nov. de 2026</time></a></li>
+    <li class="post" data-rede="youtube"><a href="https://www.youtube.com/watch?v=_SbLGEzz7QI" rel="noopener" target="_blank"><div class="thumb"><img src="https://i.ytimg.com/vi/_SbLGEzz7QI/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="rotulo youtube">Shorts</span></div><p>Converse com sua agenda: Google Calendar + ChatGPT 📅 #Shorts</p><time datetime="2026-10-31T15:06:36+00:00">31 de out. de 2026</time></a></li>
+    <li class="post" data-rede="youtube"><a href="https://www.youtube.com/watch?v=1341fcYEYuY" rel="noopener" target="_blank"><div class="thumb h"><img src="https://i.ytimg.com/vi/1341fcYEYuY/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="rotulo youtube">YouTube</span></div><p>Como organizar arquivos com IA e parar de perder tempo (Google Drive + ChatGPT)</p><time datetime="2026-10-30T23:46:12+00:00">30 de out. de 2026</time></a></li>
+    <li class="post" data-rede="youtube"><a href="https://www.youtube.com/watch?v=B4VDZdxZhSA" rel="noopener" target="_blank"><div class="thumb"><img src="https://i.ytimg.com/vi/B4VDZdxZhSA/hqdefault.jpg" alt="" loading="lazy" decoding="async"><span class="rotulo youtube">Shorts</span></div><p>Este vídeo foi feito com o meu avatar de IA 🤖 #Shorts</p><time datetime="2026-10-30T15:07:03+00:00">30 de out. de 2026</time></a></li>
+    <li class="post" data-rede="instagram"><a href="https://www.instagram.com/p/DfBeW7xCudO/" rel="noopener" target="_blank"><div class="thumb"><span class="rotulo instagram">Carrossel</span></div><p>📩 Um e-mail chegou. E se a IA ajudasse a resolver o resto?</p><time datetime="2026-10-28T03:33:01+0000">28 de out. de 2026</time></a></li>
+    <li class="post" data-rede="instagram"><a href="https://www.instagram.com/reel/DfBeA_AAN78/" rel="noopener" target="_blank"><div class="thumb"><span class="rotulo instagram">Reel</span></div><p>🚀 E se sua agenda tivesse inteligência artificial?</p><time datetime="2026-10-28T03:29:51+0000">28 de out. de 2026</time></a></li>
+    <li class="post" data-rede="instagram"><a href="https://www.instagram.com/p/DfBd5qQCmT1/" rel="noopener" target="_blank"><div class="thumb"><span class="rotulo instagram">Carrossel</span></div><p>📩 Recebi uma resposta por e-mail. Mas será que responderam tudo?</p><time datetime="2026-10-28T03:29:09+0000">28 de out. de 2026</time></a></li>
+    <li class="post" data-rede="instagram"><a href="https://www.instagram.com/reel/DfBT5OAgtAM/" rel="noopener" target="_blank"><div class="thumb"><span class="rotulo instagram">Reel</span></div><p>Este vídeo foi feito com o meu avatar de IA. 🤖</p><time datetime="2026-10-28T02:01:28+0000">28 de out. de 2026</time></a></li>
+  </ul>
 </main>
+
+<footer class="largura rodape">
+  <p>IA com Ton · Conteúdo educativo. Os recursos citados pertencem às respectivas empresas.</p>
+  <p><a href="/privacidade.html">Privacidade</a> · <a href="/termos.html">Termos</a> · <a href="/exclusao-de-dados.html">Exclusão de dados</a> · <a href="#" data-cookies>Preferências de cookies</a></p>
+</footer>
+
+<script>
+(function () {
+  var URL_POSTS = "https://xhqzakikatookphvjewy.supabase.co/functions/v1/iacomton-posts";
+  var lista = document.getElementById("posts");
+  var filtro = "todos";
+  var posts = null;
+  var fmt = new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
+  var nomes = { reel: "Reel", carrossel: "Carrossel", foto: "Post", video: "YouTube", short: "Shorts" };
+
+  function el(tag, attrs, texto) {
+    var e = document.createElement(tag);
+    for (var k in attrs) if (attrs[k] != null) e.setAttribute(k, attrs[k]);
+    if (texto != null) e.textContent = texto;
+    return e;
+  }
+  function seguro(u) { return typeof u === "string" && /^https:\/\//.test(u) ? u : null; }
+
+  function desenhar() {
+    if (!posts) return;
+    var itens = posts.filter(function (p) { return filtro === "todos" || p.rede === filtro; });
+    lista.textContent = "";
+    if (!itens.length) { lista.appendChild(el("li", { "class": "vazio" }, "Nada por aqui ainda.")); return; }
+    itens.forEach(function (p) {
+      var link = seguro(p.link); if (!link) return;
+      var li = el("li", { "class": "post" });
+      var a = el("a", { href: link, rel: "noopener", target: "_blank" });
+      var th = el("div", { "class": "thumb" + (p.rede === "youtube" && p.tipo === "video" ? " h" : "") });
+      var img = seguro(p.imagem);
+      if (img) th.appendChild(el("img", { src: img, alt: "", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" }));
+      th.appendChild(el("span", { "class": "rotulo " + p.rede }, nomes[p.tipo] || p.rede));
+      a.appendChild(th);
+      a.appendChild(el("p", null, p.titulo || (p.rede === "youtube" ? "Vídeo no YouTube" : "Post no Instagram")));
+      var d = new Date(p.data);
+      if (!isNaN(d)) a.appendChild(el("time", { datetime: p.data }, fmt.format(d)));
+      a.addEventListener("click", function () { if (window.iacomtonEvento) window.iacomtonEvento("ViewContent", { content_name: p.rede + "_" + p.tipo }); });
+      li.appendChild(a); lista.appendChild(li);
+    });
+  }
+
+  document.querySelectorAll("[data-filtro]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      filtro = b.getAttribute("data-filtro");
+      document.querySelectorAll("[data-filtro]").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      if (posts) desenhar();
+      else lista.querySelectorAll(".post").forEach(function (li) { li.hidden = filtro !== "todos" && li.getAttribute("data-rede") !== filtro; });
+    });
+  });
+
+  document.querySelectorAll("[data-evento]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      if (window.iacomtonEvento) window.iacomtonEvento(a.getAttribute("data-evento") === "aula_drive" ? "ViewContent" : "Contact", { content_name: a.getAttribute("data-evento") });
+    });
+  });
+
+  fetch(URL_POSTS).then(function (r) { return r.json(); }).then(function (j) {
+    if (j && Array.isArray(j.posts) && j.posts.length) { posts = j.posts; desenhar(); }
+  }).catch(function () { /* fica a lista estática */ });
+})();
+</script>
 </body>
 </html>

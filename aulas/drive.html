@@ -5,7 +5,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Aula grátis: organize seus arquivos com IA · IA com Ton</title>
 <meta name="description" content="Baixe grátis a aula em PDF: Google Drive + ChatGPT para organizar seus arquivos, passo a passo, com prompts prontos.">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://iacomton.com.br/aulas/drive.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IA com Ton">
+<meta property="og:title" content="Aula grátis: organize seus arquivos com IA">
+<meta property="og:description" content="Google Drive + ChatGPT, passo a passo, com prompts prontos. Baixe o PDF grátis.">
+<meta property="og:url" content="https://iacomton.com.br/aulas/drive.html">
+<meta property="og:image" content="https://iacomton.com.br/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<script src="/rastreio.js" defer></script>
 <style>
   :root{--navy:#0A1430;--navy2:#12204A;--azul:#1E6BFF;--ciano:#5CC8FF;--texto:#16203A;--suave:#5B6478;--linha:#DCE3F0;--fundo:#F6F8FC;--erro:#B4412E}
   *{box-sizing:border-box}
@@ -127,7 +136,7 @@
 </section>
 
 <footer class="rodape">
-  IA com Ton · <a href="https://www.instagram.com/iacomton/">@iacomton</a> · <a href="../privacidade.html">Privacidade</a> · <a href="../termos.html">Termos</a> · <a href="../exclusao-de-dados.html">Exclusão de dados</a><br>
+  IA com Ton · <a href="https://www.instagram.com/iacomton/">@iacomton</a> · <a href="../privacidade.html">Privacidade</a> · <a href="../termos.html">Termos</a> · <a href="../exclusao-de-dados.html">Exclusão de dados</a> · <a href="#" data-cookies>Preferências de cookies</a><br>
   Material educativo e gratuito. Google Drive é marca do Google; ChatGPT é marca da OpenAI; sem vínculo com essas empresas.
 </footer>
 
@@ -139,7 +148,10 @@
   var botao = document.getElementById("botao");
   var msg = document.getElementById("msg");
   var params = new URLSearchParams(location.search);
-  var origem = (params.get("origem") || "direto").replace(/[^a-z0-9_-]/gi, "").slice(0, 30);
+  var origem = (params.get("origem") || params.get("utm_source") || "direto").replace(/[^a-z0-9_-]/gi, "").slice(0, 30);
+
+  if (window.iacomtonEvento) window.iacomtonEvento("ViewContent", { content_name: "aula_" + AULA });
+  else document.addEventListener("DOMContentLoaded", function () { if (window.iacomtonEvento) window.iacomtonEvento("ViewContent", { content_name: "aula_" + AULA }); });
 
   var PADRAO = "Não deu certo agora. Tente de novo em instantes.";
   var noInstagram = /Instagram/i.test(navigator.userAgent);
@@ -206,6 +218,8 @@
   });
 
   function liberar(url) {
+    // Evento de conversão para o Pixel (só sai se a pessoa aceitou os cookies). Sem nome nem e-mail.
+    if (window.iacomtonEvento) window.iacomtonEvento("Lead", { content_name: "aula_" + AULA });
     form.hidden = true;
     msg.className = "msg";
     document.getElementById("pronto").hidden = false;
