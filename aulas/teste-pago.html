@@ -122,7 +122,7 @@
           <div class="hp" aria-hidden="true"><label for="site">Site</label><input id="site" name="site" type="text" tabindex="-1" autocomplete="off"></div>
           <label class="consent"><input id="termos" name="termos" type="checkbox" required>
             <span>Li e aceito os <a href="../termos.html#compras" target="_blank" rel="noopener">Termos de compra</a> e a <a href="../privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
-          <button id="botao" type="submit">Gerar o Pix</button>
+          <button id="botao" type="submit">Compre aqui</button>
           <p class="seguro">Pagamento processado pelo Asaas. O CPF é exigido pelo Asaas para emitir a cobrança. Os dados do cartão são digitados só na página segura do Asaas.</p>
           <div id="msg" class="msg" role="status" aria-live="polite"></div>
         </form>
@@ -285,7 +285,7 @@
     if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(email)) { mostrar(msg, "erro", "Confira o e-mail."); form.email.focus(); return; }
     if (!cpfValido(cpf)) { campoCpf.setAttribute("aria-invalid", "true"); document.getElementById("cpf-aviso").textContent = "Confira o CPF."; campoCpf.focus(); return; }
     if (!form.termos.checked) { mostrar(msg, "erro", "Para continuar, aceite os Termos de compra."); return; }
-    botao.disabled = true; botao.textContent = "Gerando o Pix…";
+    botao.disabled = true; botao.textContent = "Gerando o pagamento…";
     fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ acao: "criar", aula: AULA, nome: nome, email: email, cpf: cpf, origem: origem, site: form.site.value }) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j || {} }; }); })
@@ -300,7 +300,7 @@
         evento("InitiateCheckout");
         acompanhar();
       }).catch(function (err) {
-        botao.disabled = false; botao.textContent = "Gerar o Pix";
+        botao.disabled = false; botao.textContent = "Compre aqui";
         mostrar(msg, "erro", err && err.message && err.message.length < 140 && !/fetch|json|network/i.test(err.message) ? err.message : PADRAO);
       });
   });
