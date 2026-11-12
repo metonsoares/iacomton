@@ -95,27 +95,26 @@
       <div class="cartao">
         <div class="capa">
           <div class="mini">AULA 01<br><br>Organize seus arquivos com <span>IA</span></div>
-          <p><strong>Aula 01 · 8 páginas</strong>Preencha e o download começa na hora.</p>
+          <p><strong>Aula 01 · 8 páginas</strong>Preencha e receba a aula no seu e-mail.</p>
         </div>
         <form id="form" novalidate>
           <label for="nome">Digite seu nome</label>
           <input id="nome" name="nome" type="text" autocomplete="given-name" maxlength="80" required>
-          <label for="email">Digite seu e-mail</label>
+          <label for="email">Digite seu melhor e-mail (a aula vai para ele)</label>
           <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" required aria-describedby="email-aviso">
           <p id="email-aviso" class="campo-aviso" aria-live="polite"></p>
           <div class="hp" aria-hidden="true"><label for="site">Site</label><input id="site" name="site" type="text" tabindex="-1" autocomplete="off"></div>
           <label class="consent"><input id="consentimento_meta" name="consentimento_meta" type="checkbox">
             <span>Autorizo o uso do meu e-mail para ver conteúdos e anúncios do IA com Ton no Instagram e no Facebook (Meta).</span></label>
           <button id="botao" type="submit">Quero a aula grátis</button>
-          <p class="aviso">A caixa é opcional: você recebe o PDF mesmo sem marcar, e pode cancelar quando quiser. Seus dados não são vendidos. Veja a <a href="../privacidade.html">Política de Privacidade</a>.</p>
+          <p class="aviso">A caixa é opcional: a aula chega no seu e-mail mesmo sem marcar, e pode cancelar quando quiser. Seus dados não são vendidos. Veja a <a href="../privacidade.html">Política de Privacidade</a>.</p>
           <div id="msg" class="msg" role="status" aria-live="polite"></div>
         </form>
         <div id="pronto" class="pronto" hidden>
-          <p class="ok-titulo">Sua aula está liberada ✓</p>
-          <a id="abrir" class="abrir" href="#" target="_blank" rel="noopener">Abrir o PDF</a>
-          <p id="dica-ig" class="dica" hidden>Está no Instagram? Se o PDF não abrir, toque em <b>⋯</b> no canto da tela e escolha <b>Abrir no navegador</b>.</p>
-          <a id="android-chrome" class="secundario" href="#" hidden>Abrir no Chrome</a>
-          <p class="dica">O link vale por 24 horas. Salve o PDF no celular ou no computador para ter sempre à mão.</p>
+          <p class="ok-titulo">Enviamos a aula para o seu e-mail ✓</p>
+          <p class="dica">Mandamos para <b id="email-enviado"></b>. Abra o e-mail de <b>contato@iacomton.com.br</b> e toque em <b>Baixar a aula em PDF</b>.</p>
+          <p class="dica">Não chegou em 2 minutos? Confira as pastas <b>Spam</b> e <b>Promoções</b>.</p>
+          <button id="corrigir" class="secundario" type="button">Digitei o e-mail errado</button>
         </div>
       </div>
     </div>
@@ -217,22 +216,21 @@
     if (campoEmail.getAttribute("aria-invalid") || avisoEmail.textContent) checarEmail(false);
   });
 
-  function liberar(url) {
+  function liberar(email, enviado) {
     // Evento de conversão para o Pixel (só sai se a pessoa aceitou os cookies). Sem nome nem e-mail.
     if (window.iacomtonEvento) window.iacomtonEvento("Lead", { content_name: "aula_" + AULA });
     form.hidden = true;
     msg.className = "msg";
+    document.getElementById("email-enviado").textContent = email;
+    if (!enviado) document.querySelector("#pronto .ok-titulo").textContent = "Recebemos o seu pedido ✓";
     document.getElementById("pronto").hidden = false;
-    document.getElementById("abrir").href = url;
-    if (noInstagram) {
-      document.getElementById("dica-ig").hidden = false;
-      if (noAndroid) {
-        var chrome = document.getElementById("android-chrome");
-        chrome.href = "intent://" + url.replace(/^https:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end";
-        chrome.hidden = false;
-      }
-    }
   }
+  document.getElementById("corrigir").addEventListener("click", function () {
+    document.getElementById("pronto").hidden = true;
+    form.hidden = false;
+    botao.disabled = false; botao.textContent = "Quero a aula grátis";
+    form.email.focus(); form.email.select();
+  });
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -247,7 +245,7 @@
       msg.className = "msg"; form.email.focus(); return;
     }
     email = email.toLowerCase();
-    botao.disabled = true; botao.textContent = "Preparando o seu PDF…";
+    botao.disabled = true; botao.textContent = "Enviando para o seu e-mail…";
     fetch(ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -259,8 +257,7 @@
     }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j || {} }; });
     }).then(function (res) {
-      var url = res.j.url;
-      if (res.ok && typeof url === "string" && url.indexOf(ENDPOINT + "?t=") === 0) { liberar(url); return; }
+      if (res.ok && res.j.ok === true) { liberar(email, res.j.enviado === true); return; }
       throw new Error(typeof res.j.erro === "string" ? res.j.erro : PADRAO);
     }).catch(function (err) {
       botao.disabled = false; botao.textContent = "Quero a aula grátis";
