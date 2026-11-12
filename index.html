@@ -75,7 +75,7 @@
   .foto .selo small{display:block;font-weight:600;color:var(--suave);font-size:12px}
 
   /* Seções */
-  section{padding:64px 0 8px}
+  section{padding:64px 0 8px;scroll-margin-top:96px}
   .cabeca{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
   .sobre{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--azul);margin:0 0 6px}
   h2{font-size:30px;line-height:1.15;margin:0;letter-spacing:-.3px}
@@ -83,16 +83,18 @@
 
   /* Aulas */
   .aulas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;list-style:none;padding:0;margin:0}
-  .aulas a{position:relative;display:flex;flex-direction:column;height:100%;background:var(--card);border:1px solid var(--linha);border-radius:20px;padding:24px;text-decoration:none;color:var(--texto);transition:transform .15s,box-shadow .15s,border-color .15s;overflow:hidden}
-  .aulas a::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--azul),var(--ciano))}
-  .aulas a:hover{transform:translateY(-3px);border-color:var(--azul);box-shadow:0 18px 40px rgba(10,20,48,.12)}
-  .aulas .num{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:800;letter-spacing:1px;color:var(--suave);margin-bottom:18px}
-  .aulas .tag{background:rgba(30,107,255,.1);color:var(--azul);padding:4px 10px;border-radius:999px;font-size:12px}
-  .aulas .icone{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:var(--navy);color:var(--ciano);margin-bottom:16px}
-  .aulas .icone svg{width:26px;height:26px}
+  .aulas a{display:flex;flex-direction:column;height:100%;background:var(--card);border:1px solid var(--linha);border-radius:20px;padding:24px;text-decoration:none;color:var(--texto);transition:box-shadow .15s,border-color .15s}
+  .aulas a:hover{border-color:var(--azul);box-shadow:0 16px 36px rgba(10,20,48,.10)}
+  .aulas .num{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .aulas .icone{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(30,107,255,.10);color:var(--azul);flex:none}
+  .aulas .icone svg{width:24px;height:24px}
+  .aulas .rot{font-size:13px;font-weight:700;color:var(--suave)}
+  .aulas .tag{margin-left:auto;background:#E8F7EE;color:#137A3E;padding:4px 10px;border-radius:999px;font-size:12px;font-weight:800}
   .aulas h3{font-size:20px;line-height:1.25;margin:0 0 8px}
-  .aulas p{margin:0 0 20px;color:var(--suave);font-size:15px;flex:1}
-  .aulas .baixar{font-weight:800;color:var(--azul)}
+  .aulas p{margin:0 0 22px;color:var(--suave);font-size:15px;flex:1}
+  .aulas .baixar{align-self:flex-start;display:inline-flex;gap:6px;align-items:center;font-weight:800;font-size:15px;color:#fff;background:var(--azul);padding:10px 16px;border-radius:10px}
+  .aulas a:hover .baixar{background:#3A80FF}
+  @media (prefers-color-scheme:dark){.aulas .tag{background:rgba(46,204,113,.15);color:#7BE0A6}.aulas .icone{background:rgba(92,200,255,.12);color:var(--ciano)}}
 
   /* Conteúdos */
   .filtros{display:flex;gap:8px;flex-wrap:wrap}
@@ -192,22 +194,19 @@
     </div>
     <ul class="aulas">
       <li><a href="/aulas/drive.html?origem=site" data-evento="aula_drive">
-        <span class="num">AULA 01 <span class="tag">GRÁTIS</span></span>
-        <span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></span>
+        <span class="num"><span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></span><span class="rot">Aula 01</span><span class="tag">Grátis</span></span>
         <h3>Organize seus arquivos com IA</h3>
         <p>Google Drive + ChatGPT, passo a passo: da pasta Downloads bagunçada a uma estrutura simples que você mantém sozinho.</p>
         <span class="baixar">Baixar grátis →</span>
       </a></li>
       <li><a href="/aulas/chrome.html?origem=site" data-evento="aula_chrome">
-        <span class="num">AULA 02 <span class="tag">GRÁTIS</span></span>
-        <span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" d="M12 8.5h8.5M9 13.7 4.8 6.4M15 13.7l-4.3 7.3"/></svg></span>
+        <span class="num"><span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" d="M12 8.5h8.5M9 13.7 4.8 6.4M15 13.7l-4.3 7.3"/></svg></span><span class="rot">Aula 02</span><span class="tag">Grátis</span></span>
         <h3>ChatGPT no Chrome</h3>
         <p>Como conectar a extensão do ChatGPT ao navegador, 5 usos com prompts prontos e os limites que ninguém conta.</p>
         <span class="baixar">Baixar grátis →</span>
       </a></li>
       <li><a href="/aulas/agentes.html?origem=site" data-evento="aula_agentes">
-        <span class="num">AULA 03 <span class="tag">GRÁTIS</span></span>
-        <span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.2 8.2l3.6 7.5M16.8 8.2l-3.6 7.5"/></g></svg></span>
+        <span class="num"><span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.5 6h7M7.2 8.2l3.6 7.5M16.8 8.2l-3.6 7.5"/></g></svg></span><span class="rot">Aula 03</span><span class="tag">Grátis</span></span>
         <h3>MCP, Skills e A2A</h3>
         <p>Como as IAs trabalham juntas: o que cada sigla faz, quando usar e os cuidados de segurança, em linguagem simples.</p>
         <span class="baixar">Baixar grátis →</span>
