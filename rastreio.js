@@ -3,7 +3,7 @@
    Para ligar: preencher PIXEL_META (e, se um dia houver, GA4). Eventos: window.iacomtonEvento("Lead", {...}). */
 (function () {
   var PIXEL_META = "4655882121404152";   // ID do conjunto de dados (Pixel) da Meta, só números
-  var GA4 = "";          // ex.: "G-XXXXXXX" (vazio = desligado)
+  var GA4 = "G-PNMRMZTNVZ";          // ex.: "G-XXXXXXX" (vazio = desligado)
   var GOOGLE_ADS = "";   // ex.: "AW-123456789" (vazio = desligado). Compra no Google Ads vem do servidor (conversão offline).
   var GOOGLE = /^G-[A-Z0-9]{4,}$/.test(GA4) || /^AW-\d{6,}$/.test(GOOGLE_ADS);
   var CHAVE = "iacomton_cookies";
@@ -42,7 +42,7 @@
       g.src = "https://www.googletagmanager.com/gtag/js?id=" + (GA4 || GOOGLE_ADS);
       document.head.appendChild(g);
       window.gtag("js", new Date());
-      if (GA4) window.gtag("config", GA4);
+      if (GA4) window.gtag("config", GA4, { cookie_expires: 34128000 }); // cookies do GA por 13 meses no máximo
       if (GOOGLE_ADS) window.gtag("config", GOOGLE_ADS);
     }
     fila.forEach(function (ev) { enviar(ev[0], ev[1]); }); fila = [];
