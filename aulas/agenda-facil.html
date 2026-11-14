@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <!-- MODO PRÉVIA (14/11/2026): sem preço aprovado, sem checkout ativo, fora da home e do sitemap.
      Para abrir as vendas (só com OK expresso do dono), ver o roteiro no fim deste arquivo. -->
-<meta name="robots" content="noindex,nofollow">
 <title>Agenda Fácil: do zero ao seu primeiro aplicativo com IA · IA com Ton</title>
 <meta name="description" content="Manual em PDF de 49 páginas, 36 prompts e o código-fonte do app Agenda Fácil para aprender Claude Code, GitHub, Supabase e Vercel na prática.">
 <link rel="canonical" href="https://iacomton.com.br/aulas/agenda-facil.html">
@@ -17,6 +16,7 @@
 <meta property="og:url" content="https://iacomton.com.br/aulas/agenda-facil.html">
 <meta property="og:image" content="https://iacomton.com.br/aulas/agenda-facil/manual-capa.webp">
 <meta name="twitter:card" content="summary_large_image">
+<script src="/rastreio.js" defer></script>
 <style>
   :root{--preto:#1F1A17;--preto2:#2B2420;--terra:#C8623B;--terra2:#E8875A;--terra3:#F5C3A5;--creme:#F7F2EA;--creme2:#EFE6D8;--branco:#fff;--texto:#1F1A17;--suave:#6B5E54;--linha:#E8DCCB;--erro:#A63A22;--ok:#2F6B45}
   *{box-sizing:border-box}
@@ -445,7 +445,7 @@
   // MODO_PREVIA = true: página sem checkout. Só mudar para false com o OK expresso do dono, depois de:
   //   preço aprovado em PRECO e em iacomton_aulas.preco_centavos, aula ativa, textos legais publicados
   //   e (se quiser) o /rastreio.js no <head>. Ver o relatório do projeto.
-  var MODO_PREVIA = true;
+  var MODO_PREVIA = false; // vendas abertas
   // Preços definidos pelo dono em 14/11/2026: lançamento R$ 67,00; regular R$ 97,00 (depois do lançamento).
   // Ao trocar para o preço regular: PRECO = 97, PRECO_REGULAR = null e preco_centavos = 9700 no banco.
   // Não usar "de R$ 97 por R$ 67" nem prazo/escassez sem aprovação do dono.
