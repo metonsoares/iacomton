@@ -400,6 +400,7 @@
             <img id="qr" alt="QR Code do Pix">
             <div class="copia"><input id="copiaecola" readonly aria-label="Código Pix copia e cola"><button id="copiar" type="button">Copiar</button></div>
             <div class="espera"><span class="ponto" aria-hidden="true"></span><span id="espera-txt">Aguardando o pagamento. Esta página atualiza sozinha.</span></div>
+            <button id="pix-de-novo" type="button" class="secundario" hidden>Gerar o QR Code do Pix de novo</button>
             <p class="dica">ou</p>
             <button id="cartao" type="button" class="secundario">Pagar com cartão de crédito</button>
           </div>
@@ -555,6 +556,30 @@
     else { c.select(); try { document.execCommand("copy"); ok(); } catch (e) {} }
   });
 
+  // O QR Code do Pix pode demorar a ficar pronto no Asaas: o pedido continua e a pessoa tenta de novo ou paga com cartão.
+  function semPix(falta) {
+    document.querySelector(".copia").hidden = falta;
+    document.getElementById("qr").hidden = falta || !document.getElementById("qr").src;
+    document.getElementById("pix-de-novo").hidden = !falta;
+    if (falta) mostrar(msg2, "erro", "O QR Code do Pix ainda não ficou pronto. Toque em \"Gerar o QR Code do Pix de novo\" em instantes, ou pague com cartão.");
+    else { msg2.className = "msg"; msg2.textContent = ""; }
+  }
+  document.getElementById("pix-de-novo").addEventListener("click", function () {
+    var b = this;
+    b.disabled = true; b.textContent = "Gerando o QR Code…";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "pix", pedido: pedido, chave: chave }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        b.disabled = false; b.textContent = "Gerar o QR Code do Pix de novo";
+        if (j.pix && j.pix.copiaecola) {
+          var qr = document.getElementById("qr");
+          if (j.pix.imagem && /^[A-Za-z0-9+/=]+$/.test(j.pix.imagem)) qr.src = "data:image/png;base64," + j.pix.imagem;
+          document.getElementById("copiaecola").value = j.pix.copiaecola;
+          semPix(false);
+        } else mostrar(msg2, "erro", j.erro || PADRAO);
+      }).catch(function () { b.disabled = false; b.textContent = "Gerar o QR Code do Pix de novo"; mostrar(msg2, "erro", PADRAO); });
+  });
+
   document.getElementById("cartao").addEventListener("click", function () {
     var b = this;
     b.disabled = true; b.textContent = "Abrindo a página segura do Asaas…";
@@ -589,6 +614,7 @@
         var qr = document.getElementById("qr");
         if (j.pix && j.pix.imagem && /^[A-Za-z0-9+/=]+$/.test(j.pix.imagem)) qr.src = "data:image/png;base64," + j.pix.imagem; else qr.hidden = true;
         document.getElementById("copiaecola").value = (j.pix && j.pix.copiaecola) || "";
+        semPix(!(j.pix && j.pix.copiaecola));
         irPara("pagar");
         evento("InitiateCheckout");
         acompanhar();
