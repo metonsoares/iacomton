@@ -4,6 +4,8 @@
 (function () {
   var PIXEL_META = "4655882121404152";   // ID do conjunto de dados (Pixel) da Meta, só números
   var GA4 = "";          // ex.: "G-XXXXXXX" (vazio = desligado)
+  var GOOGLE_ADS = "";   // ex.: "AW-123456789" (vazio = desligado). Compra no Google Ads vem do servidor (conversão offline).
+  var GOOGLE = /^G-[A-Z0-9]{4,}$/.test(GA4) || /^AW-\d{6,}$/.test(GOOGLE_ADS);
   var CHAVE = "iacomton_cookies";
   var fila = [];
   var ligado = false;
@@ -15,7 +17,7 @@
   try {
     var p = new URLSearchParams(location.search);
     var o = {};
-    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"].forEach(function (k) {
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid", "gbraid", "wbraid"].forEach(function (k) {
       var v = p.get(k); if (v) o[k] = v.slice(0, 100);
     });
     if (Object.keys(o).length && !sessionStorage.getItem("iacomton_origem")) sessionStorage.setItem("iacomton_origem", JSON.stringify(o));
@@ -30,19 +32,29 @@
       window.fbq("init", PIXEL_META);
       window.fbq("track", "PageView");
     }
-    if (/^G-[A-Z0-9]{4,}$/.test(GA4)) {
-      var g = document.createElement("script"); g.async = true; g.src = "https://www.googletagmanager.com/gtag/js?id=" + GA4;
-      document.head.appendChild(g);
+    if (GOOGLE) {
+      // Modo de consentimento v2: tudo negado por padrão e liberado só porque a pessoa clicou em "Aceitar".
       window.dataLayer = window.dataLayer || [];
       window.gtag = function () { window.dataLayer.push(arguments); };
-      window.gtag("js", new Date()); window.gtag("config", GA4);
+      window.gtag("consent", "default", { ad_storage: "denied", analytics_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
+      window.gtag("consent", "update", { ad_storage: "granted", analytics_storage: "granted", ad_user_data: "granted", ad_personalization: "granted" });
+      var g = document.createElement("script"); g.async = true;
+      g.src = "https://www.googletagmanager.com/gtag/js?id=" + (GA4 || GOOGLE_ADS);
+      document.head.appendChild(g);
+      window.gtag("js", new Date());
+      if (GA4) window.gtag("config", GA4);
+      if (GOOGLE_ADS) window.gtag("config", GOOGLE_ADS);
     }
     fila.forEach(function (ev) { enviar(ev[0], ev[1]); }); fila = [];
   }
 
   function enviar(nome, dados) {
     if (window.fbq) window.fbq("track", nome, dados || {});
-    if (window.gtag) window.gtag("event", nome, dados || {});
+    if (window.gtag) {
+      // Nomes recomendados do GA4 (purchase usa transaction_id = id do pedido, que deduplica).
+      var ga = { Purchase: "purchase", InitiateCheckout: "begin_checkout", Lead: "generate_lead" }[nome] || nome;
+      window.gtag("event", ga, dados || {});
+    }
   }
 
   window.iacomtonEvento = function (nome, dados) {
@@ -56,7 +68,9 @@
     d.setAttribute("role", "dialog");
     d.setAttribute("aria-label", "Aviso de cookies");
     d.innerHTML =
-      '<p>Usamos cookies para medir as visitas e mostrar conteúdos e anúncios do IA com Ton no Instagram e no Facebook (Pixel da Meta). ' +
+      (GOOGLE
+        ? '<p>Usamos cookies para medir as visitas e mostrar conteúdos e anúncios do IA com Ton no Instagram, no Facebook, no Google e no YouTube (Pixel da Meta e tags do Google). '
+        : '<p>Usamos cookies para medir as visitas e mostrar conteúdos e anúncios do IA com Ton no Instagram e no Facebook (Pixel da Meta). ') +
       'Você escolhe. <a href="/privacidade.html#cookies">Saiba mais</a></p>' +
       '<div><button type="button" data-v="nao">Recusar</button><button type="button" data-v="sim">Aceitar</button></div>';
     var css = document.createElement("style");

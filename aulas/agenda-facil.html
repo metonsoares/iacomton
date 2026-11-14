@@ -455,6 +455,13 @@
   var msg = document.getElementById("msg"), msg2 = document.getElementById("msg2"), msg3 = document.getElementById("msg3");
   var params = new URLSearchParams(location.search);
   var origem = (params.get("origem") || params.get("utm_source") || "direto").replace(/[^a-z0-9_-]/gi, "").slice(0, 30);
+  // Origem da campanha (gclid/gbraid/wbraid/utm_*), só para atribuir a compra ao anúncio. Fica na sessão desta aba.
+  var CAMPOS = ["gclid", "gbraid", "wbraid", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  var campanha = {};
+  try { campanha = JSON.parse(sessionStorage.getItem("iacomton_origem") || "{}") || {}; } catch (e) { campanha = {}; }
+  CAMPOS.forEach(function (k) { var v = params.get(k); if (v) campanha[k] = v.slice(0, 150); });
+  try { if (Object.keys(campanha).length) sessionStorage.setItem("iacomton_origem", JSON.stringify(campanha)); } catch (e) {}
+  function aceitouCookies() { try { return localStorage.getItem("iacomton_cookies") === "sim"; } catch (e) { return false; } }
   var pedido = null, chave = null, timer = null;
 
   var vendaAberta = !MODO_PREVIA && typeof PRECO === "number" && PRECO > 0;
@@ -506,7 +513,7 @@
   function evento(nome) {
     if (!window.iacomtonEvento || !PRECO) return;
     if (nome === "Purchase") { try { if (sessionStorage.getItem(GUARDA + "_compra")) return; sessionStorage.setItem(GUARDA + "_compra", "1"); } catch (e) {} }
-    window.iacomtonEvento(nome, { content_name: "aula_" + AULA, currency: "BRL", value: PRECO });
+    window.iacomtonEvento(nome, { content_name: "aula_" + AULA, currency: "BRL", value: PRECO, transaction_id: pedido || undefined });
   }
   function liberar(email) {
     clearInterval(timer);
@@ -606,7 +613,7 @@
     if (!form.termos.checked) { mostrar(msg, "erro", "Para continuar, aceite os Termos de compra."); return; }
     botao.disabled = true; botao.textContent = "Gerando o pagamento…";
     fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ acao: "criar", aula: AULA, nome: nome, email: email, cpf: cpf, origem: origem, site: form.site.value }) })
+      body: JSON.stringify({ acao: "criar", aula: AULA, nome: nome, email: email, cpf: cpf, origem: origem, campanha: campanha, consent_ads: aceitouCookies(), site: form.site.value }) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j || {} }; }); })
       .then(function (res) {
         var j = res.j;
