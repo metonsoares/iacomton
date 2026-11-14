@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Seus downloads · IA com Ton</title>
+<!-- Área de downloads de material pago, aberta pelo link do e-mail de compra.
+     Sem Pixel nem rastreio: o endereço tem o link pessoal do comprador. -->
+<style>
+  :root{--preto:#1F1A17;--terra:#C8623B;--terra2:#E8875A;--creme:#F7F2EA;--card:#fff;--texto:#1F1A17;--suave:#6B5E54;--linha:#E8DCCB;--erro:#A63A22;--ok:#2F6B45}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--creme);color:var(--texto);font:17px/1.55 "Segoe UI",Roboto,Arial,sans-serif;padding:16px;display:grid;place-items:center}
+  .caixa{max-width:560px;width:100%;background:var(--card);border:1px solid var(--linha);border-radius:20px;overflow:hidden}
+  .topo{background:var(--preto);color:#fff;padding:18px 24px;font-weight:900;letter-spacing:.5px}
+  .topo b{color:var(--terra2)}
+  .corpo{padding:24px}
+  h1{font-size:22px;line-height:1.25;margin:0 0 8px}
+  p{color:var(--suave);margin:0 0 16px}
+  ul{list-style:none;padding:0;margin:0 0 18px}
+  li{display:flex;gap:12px;align-items:center;justify-content:space-between;border:1px solid var(--linha);border-radius:14px;padding:14px;margin:0 0 10px}
+  li strong{display:block;font-size:15px}
+  li small{color:var(--suave);font-size:13px}
+  form{margin:0}
+  button,.botao{font:inherit;font-weight:800;font-size:15px;padding:11px 16px;border:0;border-radius:10px;background:var(--terra);color:#fff;cursor:pointer;white-space:nowrap;text-decoration:none;display:inline-block}
+  button:disabled{opacity:.6;cursor:wait}
+  input[type=email]{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--linha);border-radius:10px;margin:0 0 10px}
+  .dica{font-size:14px}
+  .msg{font-size:14px;padding:10px 12px;border-radius:10px;margin:10px 0 0;display:none}
+  .msg.ok{display:block;background:#E8F3EC;color:var(--ok)}
+  .msg.erro{display:block;background:#FBEAE5;color:var(--erro)}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  a{color:var(--terra)}
+  @media (max-width:420px){li{flex-direction:column;align-items:stretch}button{width:100%}}
+</style>
+</head>
+<body>
+<main class="caixa">
+  <div class="topo">IA com <b>Ton</b></div>
+  <div class="corpo">
+    <h1 id="titulo">Carregando seus downloads…</h1>
+    <p id="texto"></p>
+    <ul id="lista" hidden></ul>
+    <p id="restantes" class="dica" hidden></p>
+
+    <div id="novo" hidden>
+      <p>Digite o e-mail usado na compra. Se houver uma compra confirmada, enviamos um link novo.</p>
+      <form id="form-novo" novalidate>
+        <input id="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" placeholder="seu@email.com" required>
+        <div class="hp" aria-hidden="true"><input id="site" type="text" tabindex="-1" autocomplete="off"></div>
+        <button id="botao-novo" type="submit">Enviar um link novo</button>
+      </form>
+      <div id="msg" class="msg" role="status" aria-live="polite"></div>
+    </div>
+
+    <p class="dica">Está no app do Gmail ou do Instagram? Se o download não começar, use <b>Abrir no navegador</b>. Salve os arquivos no seu computador.</p>
+    <p class="dica">Suporte e reembolso: <a href="mailto:contato@iacomton.com.br">contato@iacomton.com.br</a> ou Direct do <a href="https://www.instagram.com/iacomton/">@iacomton</a>.</p>
+  </div>
+</main>
+<script>
+(function () {
+  var ENDPOINT = "https://xhqzakikatookphvjewy.supabase.co/functions/v1/iacomton-checkout";
+  var t = new URLSearchParams(location.search).get("t") || "";
+  var aula = "";
+  var titulo = document.getElementById("titulo"), texto = document.getElementById("texto");
+  function kb(n) { return n >= 1048576 ? (n / 1048576).toFixed(1).replace(".", ",") + " MB" : Math.max(1, Math.round(n / 1024)) + " KB"; }
+  function novoLink(tit, msg) { titulo.textContent = tit; texto.textContent = msg; document.getElementById("novo").hidden = false; }
+
+  if (!/^[A-Za-z0-9_-]{10,300}\.[0-9a-f]{64}$/.test(t)) {
+    novoLink("Link incompleto", "Abra de novo pelo botão do e-mail da compra, ou peça um link novo abaixo.");
+  } else {
+    fetch(ENDPOINT, { method: "POST", cache: "no-store", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "arquivos", t: t }) })
+      .then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j || {} }; }); })
+      .then(function (res) {
+        var j = res.j;
+        if (res.s === 410) return novoLink("Este link expirou", "Os links valem 7 dias. Peça um novo com o e-mail da compra: chega em alguns minutos.");
+        if (res.s === 402) { titulo.textContent = "Acesso indisponível"; texto.textContent = j.erro || "O pagamento deste pedido não está confirmado."; return; }
+        if (!j.ok) return novoLink("Link inválido", "Abra de novo pelo botão do e-mail da compra, ou peça um link novo abaixo.");
+        aula = j.aula || "";
+        titulo.textContent = j.titulo;
+        texto.textContent = "Baixe cada arquivo abaixo. Este link vale 7 dias a partir do envio do e-mail.";
+        var ul = document.getElementById("lista");
+        j.arquivos.forEach(function (a) {
+          var li = document.createElement("li");
+          var info = document.createElement("div");
+          var s = document.createElement("strong"); s.textContent = a.rotulo;
+          var sm = document.createElement("small"); sm.textContent = a.nome + " · " + kb(a.bytes);
+          info.appendChild(s); info.appendChild(sm);
+          var f = document.createElement("form");
+          f.method = "post"; f.action = ENDPOINT;
+          [["t", t], ["arq", String(a.n)], ["baixar_arquivo", "1"]].forEach(function (c) {
+            var i = document.createElement("input"); i.type = "hidden"; i.name = c[0]; i.value = c[1]; f.appendChild(i);
+          });
+          var b = document.createElement("button"); b.type = "submit"; b.textContent = "Baixar";
+          f.appendChild(b);
+          li.appendChild(info); li.appendChild(f); ul.appendChild(li);
+        });
+        ul.hidden = false;
+        var r = document.getElementById("restantes");
+        r.textContent = "Downloads restantes neste pedido: " + j.restantes + ".";
+        r.hidden = false;
+      })
+      .catch(function () { titulo.textContent = "Não deu certo agora"; texto.textContent = "Tente de novo em instantes."; });
+  }
+
+  document.getElementById("form-novo").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var email = document.getElementById("email").value.trim().toLowerCase();
+    var msg = document.getElementById("msg"), b = document.getElementById("botao-novo");
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(email)) { msg.className = "msg erro"; msg.textContent = "Confira o e-mail."; return; }
+    b.disabled = true;
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ acao: "reenviar", email: email, aula: aula || "agenda-facil", site: document.getElementById("site").value }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { msg.className = j.ok ? "msg ok" : "msg erro"; msg.textContent = j.msg || j.erro || "Não deu certo agora."; })
+      .catch(function () { msg.className = "msg erro"; msg.textContent = "Não deu certo agora. Tente de novo em instantes."; })
+      .then(function () { b.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

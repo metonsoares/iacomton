@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- MODO PRÉVIA (14/11/2026): sem preço aprovado, sem checkout ativo, fora da home e do sitemap.
+     Para abrir as vendas (só com OK expresso do dono), ver o roteiro no fim deste arquivo. -->
+<meta name="robots" content="noindex,nofollow">
+<title>Agenda Fácil: do zero ao seu primeiro aplicativo com IA · IA com Ton</title>
+<meta name="description" content="Material pago em PDF: manual de 38 páginas, 36 prompts e o código-fonte do app Agenda Fácil para aprender Claude Code, GitHub, Supabase e Vercel na prática.">
+<link rel="canonical" href="https://iacomton.com.br/aulas/agenda-facil.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="IA com Ton">
+<meta property="og:title" content="Agenda Fácil: do zero ao seu primeiro aplicativo com IA">
+<meta property="og:description" content="Manual em PDF, 36 prompts e o código-fonte de um app de agendamento para aprender as 4 ferramentas na prática.">
+<meta property="og:url" content="https://iacomton.com.br/aulas/agenda-facil.html">
+<meta property="og:image" content="https://iacomton.com.br/aulas/agenda-facil/manual-capa.webp">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  :root{--preto:#1F1A17;--preto2:#2B2420;--terra:#C8623B;--terra2:#E8875A;--terra3:#F5C3A5;--creme:#F7F2EA;--creme2:#EFE6D8;--branco:#fff;--texto:#1F1A17;--suave:#6B5E54;--linha:#E8DCCB;--erro:#A63A22;--ok:#2F6B45}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--creme);color:var(--texto);font:17px/1.6 "Segoe UI",Roboto,Arial,sans-serif;overflow-x:hidden}
+  img{max-width:100%;height:auto;display:block}
+  a{color:var(--terra)}
+  .largura{max-width:1080px;margin:0 auto;padding:0 16px}
+  .faixa-previa{background:var(--terra3);color:var(--preto);font-size:14px;text-align:center;padding:8px 16px;font-weight:600}
+  .topo{background:radial-gradient(110% 90% at 100% 0%,#8A3F22 0%,var(--preto2) 45%,var(--preto) 100%);color:#fff;padding:24px 0 64px}
+  .marca{font-weight:900;letter-spacing:2px;font-size:14px;margin:0 0 40px}
+  .marca b{color:var(--terra2)}
+  .heroi{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .selo{display:inline-block;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:4px 14px;font-size:12px;letter-spacing:2px;text-transform:uppercase}
+  .selo.pago{background:var(--terra);border-color:var(--terra);font-weight:800}
+  h1{font-size:46px;line-height:1.06;margin:18px 0 16px;letter-spacing:-.5px}
+  h1 span{color:var(--terra2)}
+  .sub{color:#E9DDD2;font-size:19px;margin:0 0 26px;max-width:560px}
+  .acoes{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;font:inherit;font-weight:800;font-size:17px;padding:15px 24px;border-radius:12px;border:0;background:var(--terra);color:#fff;text-decoration:none;cursor:pointer;text-align:center}
+  .btn.claro{background:transparent;border:1.5px solid rgba(255,255,255,.5)}
+  .btn:disabled,.btn[aria-disabled=true]{background:#B9A79A;cursor:not-allowed}
+  .capa-heroi{transform:rotate(2deg);border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,.45);max-width:360px;margin-left:auto}
+  section{padding:56px 0}
+  section.alt{background:var(--branco)}
+  h2{font-size:30px;line-height:1.15;margin:0 0 10px;letter-spacing:-.3px}
+  .intro{color:var(--suave);margin:0 0 28px;max-width:720px}
+  .grade2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .grade3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grade4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .cartao{background:var(--branco);border:1px solid var(--linha);border-radius:16px;padding:20px}
+  section.alt .cartao{background:var(--creme)}
+  .cartao h3{margin:0 0 6px;font-size:18px}
+  .cartao p{margin:0;color:var(--suave);font-size:15.5px}
+  .num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--terra);color:#fff;font-weight:900;margin-bottom:10px}
+  .lista{list-style:none;padding:0;margin:0}
+  .lista li{padding-left:30px;position:relative;margin:10px 0}
+  .lista li::before{content:"✓";position:absolute;left:0;top:0;color:var(--terra);font-weight:900}
+  .lista.nao li::before{content:"✕";color:#9A8B80}
+  .incluso{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+  .icone{width:52px;height:52px;border-radius:14px;background:var(--preto);color:var(--terra2);display:grid;place-items:center;font-weight:900;font-size:13px}
+  figure{margin:0}
+  figure img{border-radius:12px;border:1px solid var(--linha);box-shadow:0 10px 30px rgba(31,26,23,.12);background:#fff}
+  figcaption{font-size:13.5px;color:var(--suave);margin-top:8px}
+  .galeria-app{display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start}
+  .galeria-app .duas{display:grid;gap:20px}
+  .cel{max-height:620px;object-fit:cover;object-position:top}
+  .corte{max-height:520px;object-fit:cover;object-position:top}
+  .ferr{border-top:4px solid var(--terra)}
+  .aviso{background:#FFF7EE;border:1px solid var(--terra3);border-left:5px solid var(--terra);border-radius:12px;padding:16px 18px;color:var(--texto);font-size:15.5px}
+  details{background:var(--branco);border:1px solid var(--linha);border-radius:12px;padding:14px 18px;margin:0 0 10px}
+  section.alt details{background:var(--creme)}
+  summary{cursor:pointer;font-weight:700}
+  details p{color:var(--suave);margin:10px 0 0}
+  .compra{background:var(--preto);color:#fff;border-radius:22px;padding:32px;display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
+  .compra .lista li{color:#EADFD5}
+  .compra .lista li::before{color:var(--terra2)}
+  .caixa-preco{background:var(--branco);color:var(--texto);border-radius:18px;padding:24px}
+  .preco{font-size:40px;font-weight:900;margin:2px 0 0;color:var(--preto)}
+  .preco small{font-size:15px;font-weight:600;color:var(--suave)}
+  .preco-nota{font-size:14px;color:var(--suave);margin:4px 0 16px}
+  .caixa-preco .btn{width:100%;font-size:19px;letter-spacing:.5px}
+  label{display:block;font-weight:600;font-size:14px;margin:12px 0 6px}
+  input[type=text],input[type=email]{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--linha);border-radius:10px;background:#fff;color:var(--texto)}
+  input:focus{outline:none;border-color:var(--terra);box-shadow:0 0 0 3px rgba(200,98,59,.18)}
+  input[aria-invalid=true]{border-color:var(--erro)}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:13px;color:var(--suave);font-weight:400}
+  .consent input{margin-top:3px;width:18px;height:18px;flex:none}
+  .campo-aviso{margin:6px 0 0;font-size:13px;color:var(--erro)}
+  .campo-aviso:empty{display:none}
+  .msg{margin-top:14px;padding:12px 14px;border-radius:10px;font-size:14px;display:none}
+  .msg.ok{display:block;background:#E8F3EC;color:var(--ok)}
+  .msg.erro{display:block;background:#FBEAE5;color:var(--erro)}
+  .seguro{font-size:12.5px;color:var(--suave);margin:10px 0 0}
+  .pix{display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+  .pix img{width:220px;height:220px;border:1px solid var(--linha);border-radius:12px;background:#fff}
+  .copia{width:100%;display:flex;gap:8px}
+  .copia input{flex:1;min-width:0;font:13px/1.3 Consolas,monospace;padding:10px;border:1.5px solid var(--linha);border-radius:10px;background:var(--creme)}
+  .copia button{font:inherit;font-weight:700;padding:10px 14px;border:0;border-radius:10px;background:var(--terra);color:#fff;cursor:pointer}
+  .espera{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--suave)}
+  .ponto{width:10px;height:10px;border-radius:50%;background:var(--terra);flex:none}
+  @media (prefers-reduced-motion:no-preference){.ponto{animation:pulsa 1.2s ease-in-out infinite}}
+  @keyframes pulsa{0%,100%{opacity:.25}50%{opacity:1}}
+  .secundario{display:block;width:100%;text-align:center;font:inherit;font-weight:700;margin-top:10px;padding:12px;border-radius:12px;border:1.5px solid var(--terra);color:var(--terra);background:none;cursor:pointer;text-decoration:none}
+  .ok-titulo{font-weight:800;color:var(--ok);font-size:18px;margin:4px 0 10px}
+  .dica{font-size:14px;color:var(--suave);margin:10px 0 0}
+  .rodape{background:var(--preto);color:#BFB1A5;font-size:13px;padding:28px 0 40px}
+  .rodape a{color:#E9DDD2}
+  @media (max-width:900px){
+    .heroi,.compra,.galeria-app{grid-template-columns:1fr}
+    .capa-heroi{margin:0 auto;max-width:280px}
+    .grade4{grid-template-columns:1fr 1fr}
+    .grade3{grid-template-columns:1fr}
+    h1{font-size:36px}
+  }
+  @media (max-width:600px){
+    .grade2,.grade4{grid-template-columns:1fr}
+    h1{font-size:31px}
+    h2{font-size:25px}
+    section{padding:44px 0}
+    .compra{padding:22px 16px}
+    .btn{width:100%}
+  }
+</style>
+</head>
+<body>
+
+<div id="faixa-previa" class="faixa-previa">Prévia da página: este material ainda não está à venda. Preço e data de lançamento serão anunciados no @iacomton.</div>
+
+<!-- 1. Título -->
+<header class="topo">
+  <div class="largura">
+    <p class="marca">IA COM <b>TON</b></p>
+    <div class="heroi">
+      <div>
+        <span class="selo pago">Material pago</span> <span class="selo">PDF + prompts + código</span>
+        <h1>Agenda Fácil: <span>do zero ao seu primeiro aplicativo com IA</span></h1>
+        <p class="sub">Aprenda na prática como Claude Code, GitHub, Supabase e Vercel trabalham juntos, construindo um app de agendamento com serviços, horários, reservas e painel administrativo.</p>
+        <div class="acoes">
+          <a class="btn" href="#comprar">Ver preço e como comprar</a>
+          <a class="btn claro" href="#conteudo">O que vem no material</a>
+        </div>
+      </div>
+      <img class="capa-heroi" src="agenda-facil/manual-capa.webp" width="910" height="1287" alt="Capa do manual Agenda Fácil, do zero ao seu primeiro aplicativo com IA">
+    </div>
+  </div>
+</header>
+
+<!-- 2. Apresentação como material pago -->
+<section>
+  <div class="largura">
+    <h2>Um material pago, para estudar no seu ritmo</h2>
+    <p class="intro">O Agenda Fácil é um <b>material digital pago</b> do IA com Ton: você compra uma vez, recebe por e-mail o link para baixar os arquivos e estuda quando quiser. Não é curso em vídeo, não tem área de membros nem mensalidade.</p>
+    <div class="grade3">
+      <div class="cartao"><span class="num">1</span><h3>Você compra no site</h3><p>Pix na própria página ou cartão de crédito na página segura do Asaas.</p></div>
+      <div class="cartao"><span class="num">2</span><h3>Recebe por e-mail</h3><p>Assim que o pagamento é confirmado, chega o link para a sua área de downloads.</p></div>
+      <div class="cartao"><span class="num">3</span><h3>Constrói o seu app</h3><p>Segue o manual, usa os prompts e compara o seu resultado com o código de referência.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. O que você aprende -->
+<section class="alt">
+  <div class="largura">
+    <h2>O que você aprende</h2>
+    <p class="intro">O manual tem 13 partes. Cada uma explica um conceito, mostra o que fazer e traz os prompts daquela etapa.</p>
+    <div class="grade2">
+      <ul class="lista">
+        <li>O papel de cada ferramenta, sem confundir código, dados e publicação</li>
+        <li>Preparar o computador e rodar o app no navegador</li>
+        <li>Trabalhar com o Claude Code em mudanças pequenas e revisar o que ele fez</li>
+        <li>Git e GitHub: commits, branches, pull requests e como voltar atrás</li>
+        <li>Explorar e personalizar o aplicativo (textos, serviços e visual)</li>
+        <li>Supabase: banco PostgreSQL, autenticação e regras de acesso (RLS)</li>
+      </ul>
+      <ul class="lista">
+        <li>Reservas sem conflito: por que duas pessoas não podem pegar o mesmo horário</li>
+        <li>Área administrativa e dados privados, sem confiar só na tela</li>
+        <li>Publicar uma prévia com GitHub e Vercel</li>
+        <li>Testes e correções: como provar o que funciona e o que falta</li>
+        <li>Segurança básica: chaves, segredos e o que nunca vai para o navegador</li>
+        <li>Um roteiro de revisão antes de colocar um app de verdade no ar</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Benefícios -->
+<section>
+  <div class="largura">
+    <h2>Por que aprender assim</h2>
+    <p class="intro">Em vez de teoria solta, você acompanha um projeto completo, do primeiro arquivo até a revisão de segurança.</p>
+    <div class="grade4">
+      <div class="cartao"><h3>Projeto real</h3><p>Um app de agendamento com cliente, administrador, serviços, horários e reservas.</p></div>
+      <div class="cartao"><h3>Prompts prontos</h3><p>36 prompts comentados, com quando usar e como avaliar a resposta da IA.</p></div>
+      <div class="cartao"><h3>Código de referência</h3><p>O código-fonte completo para comparar com o seu e entender cada parte.</p></div>
+      <div class="cartao"><h3>Segurança desde o início</h3><p>RLS, chaves públicas e secretas, e por que esconder um botão não protege nada.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Conteúdo incluído -->
+<section class="alt" id="conteudo">
+  <div class="largura">
+    <h2>O que vem no material</h2>
+    <p class="intro">Três arquivos, entregues por e-mail logo após a confirmação do pagamento.</p>
+    <div class="grade3">
+      <div class="cartao incluso"><span class="icone">PDF</span><div><h3>Manual em PDF</h3><p>38 páginas em 13 partes, com explicações, exercícios "Faça na prática", alertas de segurança e referências oficiais.</p></div></div>
+      <div class="cartao incluso"><span class="icone">36</span><div><h3>36 prompts editáveis</h3><p>Os mesmos prompts do manual em arquivo de texto (.md), para copiar e adaptar ao seu projeto.</p></div></div>
+      <div class="cartao incluso"><span class="icone">ZIP</span><div><h3>Código-fonte do app</h3><p>HTML, CSS e JavaScript, 10 testes automatizados, o roteiro SQL do Supabase com RLS e as instruções de instalação.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Imagens reais do app -->
+<section>
+  <div class="largura">
+    <h2>O aplicativo que você vai construir</h2>
+    <p class="intro">Capturas reais do Agenda Fácil rodando no navegador, no modo demonstração (dados fictícios).</p>
+    <div class="galeria-app">
+      <div class="duas">
+        <figure><img class="corte" src="agenda-facil/app-reserva.webp" width="1200" height="1446" loading="lazy" alt="Tela do Agenda Fácil com serviços, escolha de data, horários disponíveis e uma reserva registrada"><figcaption>Cliente escolhe o serviço, a data e um horário livre.</figcaption></figure>
+        <figure><img class="corte" src="agenda-facil/app-admin.webp" width="1200" height="2118" loading="lazy" alt="Painel administrativo do Agenda Fácil com serviços cadastrados, bloqueio de horários e reservas recebidas" style="object-position:bottom"><figcaption>Painel do administrador: serviços, bloqueios e reservas recebidas.</figcaption></figure>
+      </div>
+      <figure><img class="cel" src="agenda-facil/app-celular.webp" width="390" height="2510" loading="lazy" alt="Agenda Fácil aberto na largura de um celular"><figcaption>A mesma tela no celular.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Imagens reais do manual -->
+<section class="alt">
+  <div class="largura">
+    <h2>Por dentro do manual</h2>
+    <p class="intro">Páginas reais do PDF.</p>
+    <div class="grade3">
+      <figure><img src="agenda-facil/manual-ferramentas.webp" width="910" height="1287" loading="lazy" alt="Página do manual: As quatro ferramentas"><figcaption>Parte 01 · As quatro ferramentas</figcaption></figure>
+      <figure><img src="agenda-facil/manual-claude-code.webp" width="910" height="1287" loading="lazy" alt="Página do manual: Claude Code, trabalhar com um agente, com prompt da etapa"><figcaption>Parte 04 · Claude Code e os prompts da etapa</figcaption></figure>
+      <figure><img src="agenda-facil/manual-reservas.webp" width="910" height="1287" loading="lazy" alt="Página do manual: Reservas sem conflito"><figcaption>Parte 08 · Reservas sem conflito</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 8. As 4 ferramentas -->
+<section>
+  <div class="largura">
+    <h2>As 4 ferramentas, cada uma no seu papel</h2>
+    <p class="intro">Elas colaboram; nenhuma substitui as outras.</p>
+    <div class="grade4">
+      <div class="cartao ferr"><h3>Claude Code</h3><p>Agente de programação: lê os arquivos que você autorizar, propõe mudanças, roda comandos e ajuda a escrever testes. Você revisa e aprova.</p></div>
+      <div class="cartao ferr"><h3>GitHub</h3><p>Guarda o código e o histórico. Commits, branches e pull requests deixam você testar sem medo de perder o que funciona.</p></div>
+      <div class="cartao ferr"><h3>Supabase</h3><p>Banco de dados PostgreSQL, login e regras de acesso. É onde ficam usuários, serviços, horários e reservas.</p></div>
+      <div class="cartao ferr"><h3>Vercel</h3><p>Publica o site e cria prévias a cada mudança no repositório, com um endereço para testar.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Requisitos e custos externos -->
+<section class="alt">
+  <div class="largura">
+    <h2>Requisitos e custos externos</h2>
+    <p class="intro">O preço do material não inclui as ferramentas. Veja antes de comprar:</p>
+    <div class="grade2">
+      <div class="cartao">
+        <h3>Você vai precisar de</h3>
+        <ul class="lista">
+          <li>Computador (Windows, macOS ou Linux) com internet; não dá para fazer só pelo celular</li>
+          <li>Navegador atualizado e um editor de código (há opções gratuitas)</li>
+          <li>Python ou Node.js para rodar o app localmente (o manual mostra como conferir)</li>
+          <li>Contas no GitHub, no Supabase e na Vercel, e acesso ao Claude Code</li>
+          <li>Disposição para seguir comandos, ler mensagens de erro e revisar mudanças</li>
+        </ul>
+      </div>
+      <div class="cartao">
+        <h3>Custos que não são do IA com Ton</h3>
+        <ul class="lista">
+          <li><b>Claude Code</b> exige um plano pago da Anthropic ou créditos de API</li>
+          <li><b>GitHub, Supabase e Vercel</b> têm planos gratuitos, com limites</li>
+          <li>O plano gratuito (Hobby) da Vercel é para uso pessoal, não comercial</li>
+          <li>Preços e limites são definidos por cada empresa e podem mudar; confira nos sites oficiais antes de assinar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Para quem é -->
+<section>
+  <div class="largura">
+    <h2>Para quem é</h2>
+    <div class="grade2">
+      <div class="cartao"><h3>É para você se</h3>
+        <ul class="lista">
+          <li>Empreende ou trabalha por conta e quer entender como um app é feito</li>
+          <li>Já usa IA no dia a dia e quer dar o passo para criar software</li>
+          <li>É iniciante em programação e topa aprender seguindo um projeto</li>
+          <li>Quer saber o que pedir para a IA e como conferir o que ela entrega</li>
+        </ul>
+      </div>
+      <div class="cartao"><h3>Não é para você se</h3>
+        <ul class="lista nao">
+          <li>Procura um sistema pronto para usar no seu negócio amanhã</li>
+          <li>Quer um curso em vídeo ou acompanhamento individual</li>
+          <li>Já é desenvolvedor experiente com essas ferramentas</li>
+          <li>Não pode usar um computador ou criar as contas das ferramentas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Transparência -->
+<section class="alt">
+  <div class="largura">
+    <h2>O que este material não promete</h2>
+    <div class="aviso">
+      <p style="margin:0 0 10px">É um material educativo. Ele não promete renda, clientes nem resultado garantido, e a IA não substitui a sua revisão.</p>
+      <p style="margin:0">O app de exemplo funciona no <b>modo demonstração</b>, no navegador, com dados fictícios. A ligação com o Supabase e a publicação na Vercel são roteiros guiados para você executar em contas e projetos seus, de teste. O app é didático: antes de usar com clientes de verdade, faça a revisão de segurança que o manual ensina.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Pagamento, entrega, suporte e reembolso -->
+<section>
+  <div class="largura">
+    <h2>Pagamento, entrega, suporte e reembolso</h2>
+    <div class="grade2">
+      <div class="cartao"><h3>Pagamento</h3><p>Pix na própria página (QR Code ou copia e cola) ou cartão de crédito na página segura do Asaas, que processa a cobrança. Para emitir a cobrança, o Asaas pede nome, e-mail e CPF. O IA com Ton não vê nem guarda os dados do seu cartão.</p></div>
+      <div class="cartao"><h3>Entrega</h3><p>Assim que o Asaas confirma o pagamento, enviamos para o seu e-mail o link da área de downloads. O link vale 7 dias; se vencer, você pede outro nesta página com o mesmo e-mail. Guarde os arquivos no seu computador.</p></div>
+      <div class="cartao"><h3>Suporte</h3><p>Dúvidas sobre a compra ou o acesso: <a href="mailto:contato@iacomton.com.br">contato@iacomton.com.br</a> ou Direct do <a href="https://www.instagram.com/iacomton/">@iacomton</a>.</p></div>
+      <div class="cartao"><h3>Reembolso</h3><p>Você pode pedir o reembolso em até 7 dias depois da compra (direito de arrependimento, art. 49 do Código de Defesa do Consumidor), pelos mesmos contatos. O valor volta pelo mesmo meio de pagamento e o acesso aos arquivos é encerrado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 13. FAQ -->
+<section class="alt">
+  <div class="largura">
+    <h2>Perguntas frequentes</h2>
+    <details><summary>Preciso saber programar?</summary><p>Não precisa ser programador, mas precisa ter paciência para seguir comandos, ler mensagens de erro e revisar o que a IA mudou. O manual parte do zero e explica cada ferramenta.</p></details>
+    <details><summary>É curso em vídeo?</summary><p>Não. É um material em PDF com prompts e código-fonte, para estudar no seu ritmo.</p></details>
+    <details><summary>Como recebo o material?</summary><p>Por e-mail, com o link da sua área de downloads, logo depois que o pagamento é confirmado. No Pix costuma ser em instantes; no cartão, assim que a operadora aprova.</p></details>
+    <details><summary>Preciso pagar pelas ferramentas?</summary><p>O Claude Code exige um plano pago da Anthropic ou créditos de API. GitHub, Supabase e Vercel têm planos gratuitos com limites. Veja a seção "Requisitos e custos externos".</p></details>
+    <details><summary>Que tecnologia o app usa?</summary><p>HTML, CSS e JavaScript, sem framework, para você rodar e entender o app sem instalar dependências. Os dados e o login ficam no Supabase quando você liga o modo conectado.</p></details>
+    <details><summary>Posso usar o app no meu negócio?</summary><p>Ele é didático. Você pode personalizá-lo para aprender, mas antes de receber dados de clientes de verdade precisa concluir os testes de segurança do manual e verificar o plano de hospedagem (o plano gratuito da Vercel não é para uso comercial).</p></details>
+    <details><summary>O link de download venceu. E agora?</summary><p>Peça um novo aqui na página, no fim da seção de compra, com o e-mail usado na compra. Ou fale com a gente em contato@iacomton.com.br.</p></details>
+    <details><summary>O IA com Ton tem parceria com essas empresas?</summary><p>Não. Claude Code é marca da Anthropic; GitHub, da GitHub/Microsoft; Supabase, da Supabase Inc.; Vercel, da Vercel Inc. O material é independente e não tem vínculo com elas.</p></details>
+  </div>
+</section>
+
+<!-- 14. Preço e COMPRAR AGORA -->
+<section id="comprar">
+  <div class="largura">
+    <div class="compra">
+      <div>
+        <h2 style="color:#fff">Agenda Fácil · material completo</h2>
+        <ul class="lista">
+          <li>Manual em PDF, 38 páginas</li>
+          <li>36 prompts em arquivo editável</li>
+          <li>Código-fonte do app, com 10 testes e o roteiro SQL do Supabase</li>
+          <li>Entrega por e-mail, com link de download</li>
+          <li>Reembolso em até 7 dias</li>
+        </ul>
+      </div>
+      <div class="caixa-preco">
+        <p class="preco" id="preco">R$ <span id="preco-valor">—</span> <small id="preco-tipo">preço a definir</small></p>
+        <p class="preco-nota" id="preco-nota">Pagamento único. Sem mensalidade.</p>
+
+        <div id="previa">
+          <button class="btn" type="button" disabled aria-disabled="true">COMPRAR AGORA</button>
+          <p class="seguro">Vendas ainda não abertas. O preço e a data serão anunciados no <a href="https://www.instagram.com/iacomton/">@iacomton</a>.</p>
+        </div>
+
+        <form id="form" novalidate hidden>
+          <label for="nome">Nome completo</label>
+          <input id="nome" name="nome" type="text" autocomplete="name" maxlength="80" required>
+          <label for="email">E-mail (o material chega aqui)</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" required>
+          <label for="cpf">CPF</label>
+          <input id="cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required aria-describedby="cpf-aviso">
+          <p id="cpf-aviso" class="campo-aviso" aria-live="polite"></p>
+          <div class="hp" aria-hidden="true"><label for="site">Site</label><input id="site" name="site" type="text" tabindex="-1" autocomplete="off"></div>
+          <label class="consent"><input id="termos" name="termos" type="checkbox" required>
+            <span>Li e aceito os <a href="../termos.html#compras" target="_blank" rel="noopener">Termos de compra</a> e a <a href="../privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
+          <button id="botao" class="btn" type="submit">COMPRAR AGORA</button>
+          <p class="seguro">Pagamento processado pelo Asaas. O CPF é exigido pelo Asaas para emitir a cobrança. Os dados do cartão são digitados só na página segura do Asaas.</p>
+          <div id="msg" class="msg" role="status" aria-live="polite"></div>
+        </form>
+
+        <div id="pagar" hidden>
+          <div class="pix">
+            <p class="ok-titulo" style="color:var(--preto)">Pague com Pix</p>
+            <img id="qr" alt="QR Code do Pix">
+            <div class="copia"><input id="copiaecola" readonly aria-label="Código Pix copia e cola"><button id="copiar" type="button">Copiar</button></div>
+            <div class="espera"><span class="ponto" aria-hidden="true"></span><span id="espera-txt">Aguardando o pagamento. Esta página atualiza sozinha.</span></div>
+            <p class="dica">ou</p>
+            <button id="cartao" type="button" class="secundario">Pagar com cartão de crédito</button>
+          </div>
+          <div id="msg2" class="msg" role="status" aria-live="polite"></div>
+        </div>
+
+        <div id="pronto" hidden>
+          <p class="ok-titulo">Pagamento confirmado ✓</p>
+          <p class="dica" style="margin-top:0">Enviamos o link dos seus downloads para <b id="email-mascarado">o seu e-mail</b>. Confira também o spam e a aba Promoções.</p>
+          <button id="abrir" type="button" class="btn" style="margin-top:14px">Abrir meus downloads agora</button>
+          <div id="msg3" class="msg" role="status" aria-live="polite"></div>
+        </div>
+
+        <details id="ja-comprei" style="margin:18px 0 0" hidden>
+          <summary>Já comprei e preciso do link de novo</summary>
+          <form id="form-reenvio" novalidate style="margin-top:10px">
+            <input id="email-reenvio" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" placeholder="E-mail usado na compra">
+            <button id="botao-reenvio" type="submit" class="secundario">Reenviar meu acesso</button>
+            <div id="msg4" class="msg" role="status" aria-live="polite"></div>
+          </form>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <div class="largura">
+    IA com Ton · <a href="https://www.instagram.com/iacomton/">@iacomton</a> · <a href="mailto:contato@iacomton.com.br">contato@iacomton.com.br</a> · <a href="../privacidade.html">Privacidade</a> · <a href="../termos.html">Termos</a> · <a href="../exclusao-de-dados.html">Exclusão de dados</a><br>
+    Material educativo. Claude Code é marca da Anthropic; GitHub, da GitHub/Microsoft; Supabase, da Supabase Inc.; Vercel, da Vercel Inc. Sem vínculo com essas empresas.
+  </div>
+</footer>
+
+<script>
+(function () {
+  // ===== Configuração da venda =====
+  // MODO_PREVIA = true: página sem checkout. Só mudar para false com o OK expresso do dono, depois de:
+  //   preço aprovado em PRECO e em iacomton_aulas.preco_centavos, aula ativa, textos legais publicados
+  //   e (se quiser) o /rastreio.js no <head>. Ver o relatório do projeto.
+  var MODO_PREVIA = true;
+  var PRECO = null; // ex.: 97 (em reais). null = preço a definir.
+  var AULA = "agenda-facil";
+  var ENDPOINT = "https://xhqzakikatookphvjewy.supabase.co/functions/v1/iacomton-checkout";
+  var PADRAO = "Não deu certo agora. Tente de novo em instantes.";
+
+  var form = document.getElementById("form"), botao = document.getElementById("botao");
+  var msg = document.getElementById("msg"), msg2 = document.getElementById("msg2"), msg3 = document.getElementById("msg3");
+  var params = new URLSearchParams(location.search);
+  var origem = (params.get("origem") || params.get("utm_source") || "direto").replace(/[^a-z0-9_-]/gi, "").slice(0, 30);
+  var pedido = null, chave = null, timer = null;
+
+  var vendaAberta = !MODO_PREVIA && typeof PRECO === "number" && PRECO > 0;
+  if (typeof PRECO === "number" && PRECO > 0) {
+    document.getElementById("preco-valor").textContent = PRECO.toFixed(2).replace(".", ",");
+    document.getElementById("preco-tipo").textContent = "à vista";
+  }
+  if (vendaAberta) {
+    document.getElementById("faixa-previa").hidden = true;
+    document.getElementById("previa").hidden = true;
+    form.hidden = false;
+    document.getElementById("ja-comprei").hidden = false;
+  }
+
+  function mostrar(el, tipo, texto) { el.className = "msg " + tipo; el.textContent = texto; }
+  function so(d) { return String(d || "").replace(/\D/g, ""); }
+  function cpfValido(c) {
+    c = so(c);
+    if (!/^\d{11}$/.test(c) || /^(\d)\1{10}$/.test(c)) return false;
+    function dv(n) { var s = 0; for (var i = 0; i < n; i++) s += Number(c[i]) * (n + 1 - i); var r = (s * 10) % 11; return r === 10 ? 0 : r; }
+    return dv(9) === Number(c[9]) && dv(10) === Number(c[10]);
+  }
+  var campoCpf = form.cpf;
+  campoCpf.addEventListener("input", function () {
+    var d = so(campoCpf.value).slice(0, 11), o = d;
+    if (d.length > 9) o = d.slice(0, 3) + "." + d.slice(3, 6) + "." + d.slice(6, 9) + "-" + d.slice(9);
+    else if (d.length > 6) o = d.slice(0, 3) + "." + d.slice(3, 6) + "." + d.slice(6);
+    else if (d.length > 3) o = d.slice(0, 3) + "." + d.slice(3);
+    campoCpf.value = o;
+    document.getElementById("cpf-aviso").textContent = "";
+    campoCpf.removeAttribute("aria-invalid");
+  });
+
+  function irPara(estado) {
+    form.hidden = estado !== "form";
+    document.getElementById("pagar").hidden = estado !== "pagar";
+    document.getElementById("pronto").hidden = estado !== "pronto";
+    document.getElementById("preco").hidden = estado === "pronto";
+    document.getElementById("preco-nota").hidden = estado === "pronto";
+    document.getElementById("previa").hidden = true;
+  }
+  // A chave de acesso nunca fica na barra de endereço (o Pixel da Meta lê a URL): fica só nesta aba.
+  var GUARDA = "iacomton_acesso_" + AULA;
+  function guardarAcesso() { try { sessionStorage.setItem(GUARDA, pedido + "." + chave); } catch (e) {} }
+  function lerAcesso() { try { return sessionStorage.getItem(GUARDA); } catch (e) { return null; } }
+  function evento(nome) {
+    if (!window.iacomtonEvento || !PRECO) return;
+    if (nome === "Purchase") { try { if (sessionStorage.getItem(GUARDA + "_compra")) return; sessionStorage.setItem(GUARDA + "_compra", "1"); } catch (e) {} }
+    window.iacomtonEvento(nome, { content_name: "aula_" + AULA, currency: "BRL", value: PRECO });
+  }
+  function liberar(email) {
+    clearInterval(timer);
+    if (email) document.getElementById("email-mascarado").textContent = email;
+    irPara("pronto");
+    evento("Purchase");
+  }
+  function consultar() {
+    fetch(ENDPOINT, { method: "POST", cache: "no-store", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ acao: "situacao", pedido: pedido, chave: chave }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j.status === "pago") liberar(j.email);
+        else if (j.status === "estornado") { clearInterval(timer); irPara("pagar"); mostrar(msg2, "erro", "Este pagamento foi estornado."); }
+        else if (j.status === "cancelado") { clearInterval(timer); irPara("form"); mostrar(msg, "erro", "Este pedido foi cancelado. Faça um novo pedido."); }
+      }).catch(function () {});
+  }
+  function acompanhar() { clearInterval(timer); consultar(); timer = setInterval(consultar, 4000); }
+
+  // Volta pelo link de acesso (#acesso=pedido.chave) ou pela mesma aba: retoma o pedido.
+  // Lê e apaga o #acesso da URL antes de qualquer script "defer" (Pixel) carregar.
+  var m = /#acesso=([0-9a-f-]{36})\.([0-9a-f]{64})$/.exec(location.hash) || /^([0-9a-f-]{36})\.([0-9a-f]{64})$/.exec(lerAcesso() || "");
+  if (location.hash && /acesso=/.test(location.hash)) { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }
+  if (m) {
+    pedido = m[1]; chave = m[2]; guardarAcesso();
+    irPara("pagar");
+    document.getElementById("qr").hidden = true;
+    document.querySelector(".copia").hidden = true;
+    document.getElementById("espera-txt").textContent = "Conferindo o pagamento…";
+    acompanhar();
+  }
+
+  document.getElementById("abrir").addEventListener("click", function () {
+    var b = this;
+    b.disabled = true;
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "acesso", pedido: pedido, chave: chave }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j.t && /^[A-Za-z0-9_-]{10,300}\.[0-9a-f]{64}$/.test(j.t)) { location.href = "acesso.html?t=" + encodeURIComponent(j.t); return; }
+        throw new Error(j.erro || PADRAO);
+      }).catch(function (e) { b.disabled = false; mostrar(msg3, "erro", e && e.message && e.message.length < 140 ? e.message : PADRAO); });
+  });
+
+  document.getElementById("copiar").addEventListener("click", function () {
+    var c = document.getElementById("copiaecola"), b = this;
+    function ok() { b.textContent = "Copiado ✓"; setTimeout(function () { b.textContent = "Copiar"; }, 2500); }
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(c.value).then(ok, function () { c.select(); });
+    else { c.select(); try { document.execCommand("copy"); ok(); } catch (e) {} }
+  });
+
+  document.getElementById("cartao").addEventListener("click", function () {
+    var b = this;
+    b.disabled = true; b.textContent = "Abrindo a página segura do Asaas…";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "cartao", pedido: pedido, chave: chave }) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j || {} }; }); })
+      .then(function (res) {
+        var url = res.j.url;
+        if (res.ok && typeof url === "string" && /^https:\/\/([a-z0-9-]+\.)*asaas\.com\//.test(url)) { location.href = url; return; }
+        throw new Error(res.j.erro || PADRAO);
+      }).catch(function (err) {
+        b.disabled = false; b.textContent = "Pagar com cartão de crédito";
+        mostrar(msg2, "erro", err && err.message && err.message.length < 140 ? err.message : PADRAO);
+      });
+  });
+
+  form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    if (!vendaAberta) return;
+    var nome = form.nome.value.trim(), email = form.email.value.trim().toLowerCase(), cpf = so(form.cpf.value);
+    if (nome.length < 2) { mostrar(msg, "erro", "Digite seu nome completo."); form.nome.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(email)) { mostrar(msg, "erro", "Confira o e-mail."); form.email.focus(); return; }
+    if (!cpfValido(cpf)) { campoCpf.setAttribute("aria-invalid", "true"); document.getElementById("cpf-aviso").textContent = "Confira o CPF."; campoCpf.focus(); return; }
+    if (!form.termos.checked) { mostrar(msg, "erro", "Para continuar, aceite os Termos de compra."); return; }
+    botao.disabled = true; botao.textContent = "Gerando o pagamento…";
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ acao: "criar", aula: AULA, nome: nome, email: email, cpf: cpf, origem: origem, site: form.site.value }) })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j || {} }; }); })
+      .then(function (res) {
+        var j = res.j;
+        if (!res.ok || !j.pedido || !j.chave) throw new Error(j.erro || PADRAO);
+        pedido = j.pedido; chave = j.chave; guardarAcesso();
+        var qr = document.getElementById("qr");
+        if (j.pix && j.pix.imagem && /^[A-Za-z0-9+/=]+$/.test(j.pix.imagem)) qr.src = "data:image/png;base64," + j.pix.imagem; else qr.hidden = true;
+        document.getElementById("copiaecola").value = (j.pix && j.pix.copiaecola) || "";
+        irPara("pagar");
+        evento("InitiateCheckout");
+        acompanhar();
+      }).catch(function (err) {
+        botao.disabled = false; botao.textContent = "COMPRAR AGORA";
+        mostrar(msg, "erro", err && err.message && err.message.length < 140 && !/fetch|json|network/i.test(err.message) ? err.message : PADRAO);
+      });
+  });
+
+  document.getElementById("form-reenvio").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var email = document.getElementById("email-reenvio").value.trim().toLowerCase();
+    var m4 = document.getElementById("msg4"), b = document.getElementById("botao-reenvio");
+    if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(email)) { mostrar(m4, "erro", "Confira o e-mail."); return; }
+    b.disabled = true;
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "reenviar", email: email, aula: AULA }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) { mostrar(m4, j.ok ? "ok" : "erro", j.msg || j.erro || PADRAO); })
+      .catch(function () { mostrar(m4, "erro", PADRAO); })
+      .then(function () { b.disabled = false; });
+  });
+})();
+</script>
+<!--
+ROTEIRO PARA ABRIR AS VENDAS (somente com OK expresso do dono):
+1. Dono define o preço (ex.: R$ 97,00 = 9700 centavos) e aprova esta página.
+2. Trocar os arquivos v0.8 pela versão final no bucket privado iacomton-produtos e em iacomton_aula_arquivos (SHA-256 conferido).
+3. Publicar os textos legais (modelos/textos-legais-compras.md) em termos.html e privacidade.html.
+4. SQL: update iacomton_aulas set preco_centavos=<centavos>, versao='<versão final>', ativa=true where slug='agenda-facil';
+   (NUNCA ativa sem preço: sem preço, a iacomton-lead trataria como aula grátis.)
+5. Aqui: PRECO = <reais>; MODO_PREVIA = false; tirar o <meta robots noindex>; acrescentar <script src="/rastreio.js" defer></script> se quiser o Pixel.
+6. Acrescentar ao sitemap.xml e (se o dono quiser) um cartão na home.
+7. Teste de compra real de ponta a ponta autorizado pelo dono (e estorno logo depois).
+-->
+</body>
+</html>
