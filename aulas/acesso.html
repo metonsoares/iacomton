@@ -94,7 +94,8 @@
             var i = document.createElement("input"); i.type = "hidden"; i.name = c[0]; i.value = c[1]; f.appendChild(i);
           });
           var b = document.createElement("button"); b.type = "submit"; b.textContent = "Baixar";
-          if (a.restantes === 0) { b.disabled = true; b.textContent = "Limite atingido"; }
+          if (a.liberado === false) { b.disabled = true; b.textContent = "Libera em " + a.libera_em; sm.textContent = a.nome + " · " + kb(a.bytes) + " · liberado em " + a.libera_em + " (você recebe um e-mail)"; }
+          else if (a.restantes === 0) { b.disabled = true; b.textContent = "Limite atingido"; }
           f.appendChild(b);
           li.appendChild(info); li.appendChild(f); ul.appendChild(li);
         });
