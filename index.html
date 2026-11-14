@@ -260,7 +260,6 @@
   var filtro = "todos", posts = RESERVA, limite = 12;
   var MESES = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
   function dataCurta(d) { return d.getDate() + " " + MESES[d.getMonth()] + " " + d.getFullYear(); }
-  var nomes = { reel: "Reel", carrossel: "Carrossel", foto: "Post", video: "YouTube", short: "Shorts" };
   var ICONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>';
 
   function el(tag, attrs, texto) {
@@ -290,12 +289,10 @@
       }
       a.appendChild(th);
       var info = el("div", { "class": "info" });
-      var meta = el("span", { "class": "meta " + p.rede });
-      meta.appendChild(el("span", { "class": "ponto", "aria-hidden": "true" }));
       var d = new Date(p.data);
-      meta.appendChild(document.createTextNode((nomes[p.tipo] || p.rede) + (isNaN(d) ? "" : " · " + dataCurta(d))));
-      info.appendChild(meta);
-      info.appendChild(el("p", null, p.titulo || (p.rede === "youtube" ? "Vídeo no YouTube" : "Post no Instagram")));
+      if (!isNaN(d)) info.appendChild(el("span", { "class": "meta" }, dataCurta(d)));
+      var titulo = (p.titulo || "").replace(/\s*#shorts\b/gi, "").trim();
+      info.appendChild(el("p", null, titulo || "Novo conteúdo do IA com Ton"));
       a.appendChild(info);
       a.addEventListener("click", function () { if (window.iacomtonEvento) window.iacomtonEvento("ViewContent", { content_name: p.rede + "_" + p.tipo }); });
       li.appendChild(a); lista.appendChild(li);
