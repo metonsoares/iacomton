@@ -461,7 +461,7 @@
   try { campanha = JSON.parse(sessionStorage.getItem("iacomton_origem") || "{}") || {}; } catch (e) { campanha = {}; }
   CAMPOS.forEach(function (k) { var v = params.get(k); if (v) campanha[k] = v.slice(0, 150); });
   try { if (Object.keys(campanha).length) sessionStorage.setItem("iacomton_origem", JSON.stringify(campanha)); } catch (e) {}
-  function aceitouCookies() { try { return localStorage.getItem("iacomton_cookies") === "sim"; } catch (e) { return false; } }
+  function aceitouCookies() { try { return localStorage.getItem("iacomton_cookies") === "sim:2"; } catch (e) { return false; } }
   var pedido = null, chave = null, timer = null;
 
   var vendaAberta = !MODO_PREVIA && typeof PRECO === "number" && PRECO > 0;

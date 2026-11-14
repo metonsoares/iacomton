@@ -10,6 +10,10 @@
   var fila = [];
   var ligado = false;
 
+  // Versão do consentimento: "sim:2" = aceitou o aviso que cita Meta e Google. Quem aceitou o aviso antigo
+  // (só Meta, valor "sim") vê o aviso de novo quando o Google está ligado.
+  var ACEITE = GOOGLE ? "sim:2" : "sim";
+  function aceitou(v) { return v === ACEITE || v === "sim:2"; }
   function ler() { try { return localStorage.getItem(CHAVE); } catch (e) { return null; } }
   function gravar(v) { try { localStorage.setItem(CHAVE, v); } catch (e) {} }
 
@@ -86,7 +90,7 @@
     d.addEventListener("click", function (e) {
       var v = e.target && e.target.getAttribute && e.target.getAttribute("data-v");
       if (!v) return;
-      gravar(v); d.remove();
+      gravar(v === "sim" ? ACEITE : "nao"); d.remove();
       if (v === "sim") ligar(); else fila = [];
     });
     document.body.appendChild(d);
@@ -102,6 +106,6 @@
     aviso();
   });
 
-  function iniciar() { var v = ler(); if (v === "sim") ligar(); else if (v !== "nao") aviso(); }
+  function iniciar() { var v = ler(); if (aceitou(v)) ligar(); else if (v !== "nao") aviso(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", iniciar); else iniciar();
 })();
