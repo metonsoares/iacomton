@@ -85,7 +85,8 @@
           var li = document.createElement("li");
           var info = document.createElement("div");
           var s = document.createElement("strong"); s.textContent = a.rotulo;
-          var sm = document.createElement("small"); sm.textContent = a.nome + " · " + kb(a.bytes);
+          var sm = document.createElement("small");
+          sm.textContent = a.nome + " · " + kb(a.bytes) + (typeof a.restantes === "number" ? " · " + a.restantes + " de " + j.limite_por_arquivo + " downloads restantes" : "");
           info.appendChild(s); info.appendChild(sm);
           var f = document.createElement("form");
           f.method = "post"; f.action = ENDPOINT;
@@ -93,12 +94,13 @@
             var i = document.createElement("input"); i.type = "hidden"; i.name = c[0]; i.value = c[1]; f.appendChild(i);
           });
           var b = document.createElement("button"); b.type = "submit"; b.textContent = "Baixar";
+          if (a.restantes === 0) { b.disabled = true; b.textContent = "Limite atingido"; }
           f.appendChild(b);
           li.appendChild(info); li.appendChild(f); ul.appendChild(li);
         });
         ul.hidden = false;
         var r = document.getElementById("restantes");
-        r.textContent = "Downloads restantes neste pedido: " + j.restantes + ".";
+        r.textContent = "Os arquivos são de uso pessoal e saem com o seu nome e e-mail. Cada arquivo pode ser baixado até " + j.limite_por_arquivo + " vezes; salve no seu computador.";
         r.hidden = false;
       })
       .catch(function () { titulo.textContent = "Não deu certo agora"; texto.textContent = "Tente de novo em instantes."; });
