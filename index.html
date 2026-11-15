@@ -195,11 +195,25 @@
     section,section.largura{padding-top:48px}
     .grade{grid-template-columns:repeat(2,1fr);gap:12px}
     .post p{font-size:14px}
-    .aulas.compacto{grid-template-columns:1fr}
     .destaques{grid-template-columns:repeat(2,1fr);gap:12px}
-    .vitrine h3{font-size:28px}
-    .trilho .post{flex-basis:62vw}
+    .vitrine h3{font-size:26px}
+    .vitrine .rotulo{font-size:10.5px;letter-spacing:.8px;padding:4px 10px}
     .setas{display:none}
+    /* Celular: aulas, mais vistos e conteúdos viram fileiras de deslizar, da borda à borda da tela */
+    .aulas.compacto,.destaques,.trilho{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;margin-left:-16px;margin-right:-16px;padding:2px 16px 12px;scrollbar-width:none}
+    .aulas.compacto::-webkit-scrollbar,.destaques::-webkit-scrollbar,.trilho::-webkit-scrollbar{display:none}
+    .aulas.compacto>li{flex:0 0 80%;scroll-snap-align:start}
+    .destaques>li,.trilho .post{flex:0 0 44%;scroll-snap-align:start}
+    .destaques{margin-bottom:28px}
+    .post .info{padding:10px 11px 12px}
+    .post p{font-size:13.5px}
+    .meta{font-size:11px}
+    .vitrine a{padding:22px 18px}
+    .vitrine img{max-width:150px}
+    .vitrine ul{font-size:14px;margin-bottom:16px}
+    .vitrine p{font-size:15px}
+    .foto{max-width:104px}
+    .topo .largura{padding-bottom:40px}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
