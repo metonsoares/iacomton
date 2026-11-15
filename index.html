@@ -136,6 +136,9 @@
   .vitrine .preco b{font-size:34px;color:#fff;font-weight:900;letter-spacing:-.5px}
   .vitrine .cta{display:inline-flex;align-items:center;gap:8px;background:#C8623B;color:#fff;font-weight:800;font-size:17px;padding:15px 24px;border-radius:14px;box-shadow:0 10px 24px rgba(200,98,59,.35)}
   .vitrine a:hover .cta{background:#D9714A}
+  .vitrine a.banner{display:block;padding:0;background:#1D1712;border:0;overflow:hidden}
+  .vitrine a.banner img{display:block;width:100%;max-width:none;height:auto;-webkit-mask-image:none;mask-image:none}
+  .vitrine .so-mobile{display:none}
   .vitrine img{width:100%;height:auto;max-width:300px;justify-self:center;-webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect}
 
   /* Aulas grátis mais compactas: 4 por linha no computador */
@@ -176,6 +179,8 @@
     .grade{grid-template-columns:repeat(3,1fr)}
     .destaques{grid-template-columns:repeat(2,1fr)}
     .vitrine a{grid-template-columns:1fr;padding:26px 22px}
+    .vitrine .so-desktop{display:none}
+    .vitrine .so-mobile{display:block}
     .vitrine img{order:-1;max-width:200px;justify-self:center;margin:-8px 0 -12px}
   }
   @media (max-width:640px){
@@ -240,7 +245,10 @@
   <section id="materiais" class="largura" aria-labelledby="t-materiais">
     <h2 id="t-materiais" class="sr-only">Material completo</h2>
     <ul class="vitrine">
-      <li><a href="/aulas/agenda-facil.html?origem=site" data-evento="material_agenda_facil">
+      <li class="so-desktop"><a class="banner" href="/aulas/agenda-facil.html?origem=site" data-evento="material_agenda_facil">
+        <img src="/aulas/agenda-facil/banner-home.webp" alt="Agenda Fácil: Do zero ao seu primeiro aplicativo com IA. Crie seu app de agendamento com Claude Code, GitHub, Supabase e Vercel, passo a passo. Manual de 49 páginas + 36 prompts comentados, código-fonte completo + banco de dados Supabase, explicações passo a passo para iniciantes. De R$ 129,00 por R$ 67,00 ou até 6x sem juros. Quero criar meu aplicativo." width="1200" height="442">
+      </a></li>
+      <li class="so-mobile"><a href="/aulas/agenda-facil.html?origem=site" data-evento="material_agenda_facil">
         <div>
           <span class="rotulo">Material completo · Agenda Fácil</span>
           <h3>Do zero ao seu primeiro <span>aplicativo com IA</span></h3>
