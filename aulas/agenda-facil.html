@@ -77,6 +77,9 @@
   .caixa-preco{background:var(--branco);color:var(--texto);border-radius:18px;padding:24px}
   .preco{font-size:40px;font-weight:900;margin:2px 0 0;color:var(--preto)}
   .preco small{font-size:15px;font-weight:600;color:var(--suave)}
+  .preco small.pre{font-size:22px;font-weight:800;color:var(--preto)}
+  .preco-de{font-size:17px;font-weight:700;color:var(--suave);margin:6px 0 0}
+  .preco-de s{text-decoration-color:var(--terra);text-decoration-thickness:2px}
   .preco-nota{font-size:14px;color:var(--suave);margin:4px 0 16px}
   .caixa-preco .btn{width:100%;font-size:19px;letter-spacing:.5px}
   label{display:block;font-weight:600;font-size:14px;margin:12px 0 6px}
@@ -136,9 +139,9 @@
         <span class="selo">PDF + prompts + código</span>
         <h1>Agenda Fácil: <span>do zero ao seu primeiro aplicativo com IA</span></h1>
         <p class="sub">Aprenda na prática como Claude Code, GitHub, Supabase e Vercel trabalham juntos, construindo um app de agendamento com serviços, horários, reservas e painel administrativo.</p>
-        <p class="sub" style="font-size:16px;margin-top:-10px">Compra única · <b style="color:#fff">R$ 67,00</b> no lançamento, ou em até 6x sem juros no cartão</p>
+        <p class="sub" style="font-size:16px;margin-top:-10px">Compra única · De <s>R$ 129,00</s> por <b style="color:#fff">R$ 67,00</b> no lançamento, ou em até 6x sem juros no cartão</p>
         <div class="acoes">
-          <a class="btn" href="#comprar">Ver preço e como comprar</a>
+          <a class="btn" href="#comprar">Compre aqui</a>
           <a class="btn claro" href="#conteudo">O que vem no material</a>
         </div>
       </div>
@@ -345,7 +348,7 @@
   <div class="largura">
     <h2>Perguntas frequentes</h2>
     <details><summary>Recebo atualizações? É assinatura?</summary><p>Não é assinatura. Você compra uma vez e recebe a versão 1.0 do material (manual, prompts e código-fonte). Não há atualizações incluídas: se surgirem novos materiais ou novas versões, eles serão vendidos à parte, cada um com o seu preço.</p></details>
-    <details><summary>Quanto custa e como pago?</summary><p>No lançamento, R$ 67,00, em pagamento único e sem mensalidade, por Pix ou cartão de crédito (à vista ou em até 6x sem juros), processado pelo Asaas. Depois do lançamento, o preço regular será R$ 97,00. O valor não inclui as assinaturas das ferramentas (veja "Requisitos e custos externos").</p></details>
+    <details><summary>Quanto custa e como pago?</summary><p>No lançamento, de R$ 129,00 por R$ 67,00, em pagamento único e sem mensalidade, por Pix ou cartão de crédito (à vista ou em até 6x sem juros), processado pelo Asaas. Depois do lançamento, o preço regular será R$ 129,00. O valor não inclui as assinaturas das ferramentas (veja "Requisitos e custos externos").</p></details>
     <details><summary>Preciso saber programar?</summary><p>Não precisa ser programador, mas precisa ter paciência para seguir comandos, ler mensagens de erro e revisar o que a IA mudou. O manual parte do zero e explica cada ferramenta.</p></details>
     <details><summary>É curso em vídeo?</summary><p>Não. É um material em PDF com prompts e código-fonte, para estudar no seu ritmo.</p></details>
     <details><summary>Como recebo o material?</summary><p>Por e-mail, em duas etapas. A Etapa 1 (manual até a Parte 06, os prompts dessas partes e o app em modo demonstração) chega logo depois que o pagamento é confirmado: no Pix costuma ser em instantes; no cartão, assim que a operadora aprova. A Etapa 2 (manual completo, os 36 prompts e o código-fonte completo) chega no 8º dia depois da compra.</p></details>
@@ -375,8 +378,9 @@
       </div>
       <div class="caixa-preco">
         <p class="preco-nota" style="margin:0;font-weight:700;color:var(--terra)">Preço de lançamento</p>
+        <p class="preco-de" id="preco-de" hidden></p>
         <p class="preco" id="preco">R$ <span id="preco-valor">—</span> <small id="preco-tipo">preço a definir</small></p>
-        <p class="preco-nota" id="preco-nota">Pagamento único, sem mensalidade. Pix, ou cartão à vista ou em até <b>6x sem juros</b>.<br><span id="preco-regular-txt"></span></p>
+        <p class="preco-nota" id="preco-nota"><span id="preco-nota-txt">Pagamento único, sem mensalidade. Pix, ou cartão à vista ou em até <b>6x sem juros</b>.</span><br><span id="preco-regular-txt"></span></p>
 
         <div id="previa">
           <button class="btn" type="button" disabled aria-disabled="true">COMPRAR AGORA</button>
@@ -448,11 +452,12 @@
   //   preço aprovado em PRECO e em iacomton_aulas.preco_centavos, aula ativa, textos legais publicados
   //   e (se quiser) o /rastreio.js no <head>. Ver o relatório do projeto.
   var MODO_PREVIA = false; // vendas abertas
-  // Preços definidos pelo dono em 14/11/2026: lançamento R$ 67,00; regular R$ 97,00 (depois do lançamento).
-  // Ao trocar para o preço regular: PRECO = 97, PRECO_REGULAR = null e preco_centavos = 9700 no banco.
-  // Não usar "de R$ 97 por R$ 67" nem prazo/escassez sem aprovação do dono.
+  // Preços do dono: lançamento R$ 67,00. Em 14/11/2026 (noite) o dono mudou o regular de R$ 97,00 para R$ 129,00
+  // e pediu "De R$ 129,00 por R$ 67,00" (avisado do risco de oferta enganosa enquanto o produto não for vendido a R$ 129).
+  // Ao trocar para o preço regular: PRECO = 129, PRECO_REGULAR = null e preco_centavos = 12900 no banco.
+  // Prazo/escassez continuam proibidos sem aprovação do dono.
   var PRECO = 67;
-  var PRECO_REGULAR = 97;
+  var PRECO_REGULAR = 129;
   var AULA = "agenda-facil";
   var ENDPOINT = "https://xhqzakikatookphvjewy.supabase.co/functions/v1/iacomton-checkout";
   var PADRAO = "Não deu certo agora. Tente de novo em instantes.";
@@ -472,10 +477,22 @@
 
   var vendaAberta = !MODO_PREVIA && typeof PRECO === "number" && PRECO > 0;
   if (typeof PRECO === "number" && PRECO > 0) {
-    document.getElementById("preco-valor").textContent = PRECO.toFixed(2).replace(".", ",");
-    document.getElementById("preco-tipo").textContent = "compra única";
+    // Pedido do dono (14/11/2026): destacar a parcela "6x de R$ 11,16" no lugar do valor à vista.
+    // 67,00 / 6 = 11,1666…; o Asaas arredonda as parcelas e ajusta os centavos numa delas (total sempre R$ 67,00).
+    var PARCELAS = 6;
+    var parcela = Math.floor(PRECO * 100 / PARCELAS) / 100;
+    var pr = document.getElementById("preco"); pr.textContent = "";
+    var pq = document.createElement("small"); pq.className = "pre"; pq.textContent = PARCELAS + "x de ";
+    pr.appendChild(pq); pr.appendChild(document.createTextNode("R$ " + parcela.toFixed(2).replace(".", ",")));
+    var sj = document.createElement("small"); sj.textContent = " sem juros"; pr.appendChild(sj);
+    var total = "R$ " + PRECO.toFixed(2).replace(".", ",");
+    document.getElementById("preco-nota-txt").textContent = "Total " + total + " no cartão, sem mensalidade. Ou " + total + " à vista no Pix ou no cartão.";
     if (typeof PRECO_REGULAR === "number" && PRECO_REGULAR > PRECO) {
-      document.getElementById("preco-regular-txt").textContent = "Depois do lançamento, o preço regular será R$ " + PRECO_REGULAR.toFixed(2).replace(".", ",") + ".";
+      var reg = "R$ " + PRECO_REGULAR.toFixed(2).replace(".", ",");
+      document.getElementById("preco-regular-txt").textContent = "Depois do lançamento, o preço regular será " + reg + ".";
+      var de = document.getElementById("preco-de");
+      de.textContent = "De "; var s = document.createElement("s"); s.textContent = reg; de.appendChild(s); de.appendChild(document.createTextNode(" por"));
+      de.hidden = false;
     }
   }
   if (vendaAberta) {
@@ -523,6 +540,7 @@
     document.getElementById("pronto").hidden = estado !== "pronto";
     document.getElementById("preco").hidden = estado === "pronto";
     document.getElementById("preco-nota").hidden = estado === "pronto";
+    if (estado === "pronto") document.getElementById("preco-de").hidden = true;
     document.getElementById("previa").hidden = true;
   }
   // A chave de acesso nunca fica na barra de endereço (o Pixel da Meta lê a URL): fica só nesta aba.
