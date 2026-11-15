@@ -4,7 +4,7 @@
 (function () {
   var PIXEL_META = "4655882121404152";   // ID do conjunto de dados (Pixel) da Meta, só números
   var GA4 = "G-PNMRMZTNVZ";          // ex.: "G-XXXXXXX" (vazio = desligado)
-  var GOOGLE_ADS = "";   // ex.: "AW-123456789" (vazio = desligado). Compra no Google Ads vem do servidor (conversão offline).
+  var GOOGLE_ADS = "AW-18575602682";   // ex.: "AW-123456789" (vazio = desligado). Compra no Google Ads vem do servidor (conversão offline).
   var GOOGLE = /^G-[A-Z0-9]{4,}$/.test(GA4) || /^AW-\d{6,}$/.test(GOOGLE_ADS);
   var CHAVE = "iacomton_cookies";
   var fila = [];
