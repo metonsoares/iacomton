@@ -36,6 +36,7 @@
   a{color:var(--azul)}
   img{max-width:100%}
   .largura{max-width:1120px;margin:0 auto;padding:0 16px}
+  .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   :focus-visible{outline:3px solid var(--ciano);outline-offset:2px;border-radius:6px}
 
   /* Barra do topo */
@@ -76,6 +77,7 @@
 
   /* Seções */
   section{padding:64px 0 8px;scroll-margin-top:96px}
+  section.largura{padding-top:64px;padding-bottom:8px}
   .cabeca{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
   .sobre{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--azul);margin:0 0 6px}
   h2{font-size:30px;line-height:1.15;margin:0;letter-spacing:-.3px}
@@ -119,6 +121,47 @@
   .mais button:hover{border-color:var(--azul)}
   .vazio{color:var(--suave)}
 
+  /* Vitrine dos materiais completos (pagos) */
+  .vitrine{list-style:none;padding:0;margin:0;display:grid;gap:20px}
+  .vitrine a{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center;text-decoration:none;color:#fff;border-radius:24px;padding:32px 36px;background:radial-gradient(90% 140% at 100% 0%,#8A3F22 0%,#2B2420 48%,#1F1A17 100%);border:1px solid rgba(232,135,90,.35);box-shadow:0 24px 60px rgba(31,26,23,.25);transition:transform .15s,box-shadow .15s}
+  .vitrine a:hover{transform:translateY(-2px);box-shadow:0 30px 70px rgba(31,26,23,.35)}
+  .vitrine .rotulo{display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#FFD3BE;background:rgba(232,135,90,.18);border:1px solid rgba(232,135,90,.4);padding:4px 12px;border-radius:999px}
+  .vitrine h3{font-size:30px;line-height:1.12;margin:14px 0 10px;letter-spacing:-.3px}
+  .vitrine h3 span{color:#E8875A}
+  .vitrine p{color:#E9DDD2;margin:0 0 14px;font-size:16px}
+  .vitrine ul{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:6px;color:#E9DDD2;font-size:15px}
+  .vitrine ul li::before{content:"✓ ";color:#E8875A;font-weight:900}
+  .vitrine .compra{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .vitrine .preco{font-size:15px;color:#FFD3BE}
+  .vitrine .preco b{font-size:26px;color:#fff;margin-right:4px}
+  .vitrine .cta{display:inline-flex;align-items:center;gap:8px;background:#C8623B;color:#fff;font-weight:800;padding:13px 20px;border-radius:12px}
+  .vitrine a:hover .cta{background:#D9714A}
+  .vitrine img{width:100%;height:auto;max-width:230px;justify-self:center;border-radius:10px;transform:rotate(3deg);box-shadow:0 22px 50px rgba(0,0,0,.45)}
+
+  /* Aulas grátis mais compactas: 4 por linha no computador */
+  .aulas.compacto{grid-template-columns:repeat(4,1fr);gap:16px}
+  .aulas.compacto a{padding:18px;border-radius:16px}
+  .aulas.compacto .num{margin-bottom:12px}
+  .aulas.compacto h3{font-size:17px}
+  .aulas.compacto p{font-size:14px;margin-bottom:16px}
+  .aulas.compacto .baixar{font-size:14px;padding:8px 14px}
+
+  /* Mais vistos */
+  .destaques{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;padding:0;margin:0 0 40px}
+  .num-vistos{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--azul)}
+  .rank{position:absolute;top:10px;left:10px;z-index:1;background:rgba(10,20,48,.85);color:#fff;font-weight:900;font-size:13px;border-radius:8px;padding:3px 9px}
+
+  /* Carrossel com setas */
+  .subtitulo{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;flex-wrap:wrap}
+  .subtitulo h3{font-size:20px;margin:0}
+  .setas{display:flex;gap:8px}
+  .setas button{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--linha);background:var(--card);color:var(--texto);font-size:20px;font-weight:800;cursor:pointer;display:grid;place-items:center}
+  .setas button:hover:not(:disabled){border-color:var(--azul);color:var(--azul)}
+  .setas button:disabled{opacity:.35;cursor:default}
+  .trilho{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;list-style:none;padding:2px 2px 12px;margin:0;scrollbar-width:thin}
+  .trilho .post{flex:0 0 220px;scroll-snap-align:start}
+  .contagem{font-size:13px;color:var(--suave);margin:8px 0 0}
+
   .rodape{margin-top:72px;background:var(--navy);color:#A9B6D3;padding:36px 0 44px;font-size:14px}
   .rodape .largura{display:flex;gap:24px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap}
   .rodape a{color:#C9D6F5}
@@ -129,7 +172,11 @@
     .foto{max-width:260px;justify-self:start;order:-1}
     .foto .selo{left:auto;right:-12px}
     .aulas{grid-template-columns:1fr}
+    .aulas.compacto{grid-template-columns:repeat(2,1fr)}
     .grade{grid-template-columns:repeat(3,1fr)}
+    .destaques{grid-template-columns:repeat(2,1fr)}
+    .vitrine a{grid-template-columns:1fr;padding:26px 22px}
+    .vitrine img{order:-1;max-width:150px;justify-self:start}
   }
   @media (max-width:640px){
     .menu a:not(.rede){display:none}
@@ -140,9 +187,14 @@
     .foto .selo{display:none}
     .topo .largura{gap:24px;padding-top:28px}
     h2{font-size:25px}
-    section{padding-top:48px}
+    section,section.largura{padding-top:48px}
     .grade{grid-template-columns:repeat(2,1fr);gap:12px}
     .post p{font-size:14px}
+    .aulas.compacto{grid-template-columns:1fr}
+    .destaques{grid-template-columns:repeat(2,1fr);gap:12px}
+    .vitrine h3{font-size:24px}
+    .trilho .post{flex-basis:62vw}
+    .setas{display:none}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -153,6 +205,7 @@
   <div class="largura">
     <a class="logo" href="/" aria-label="IA com Ton, página inicial"><img src="/logo.png" alt="" width="36" height="36">IA com <b>Ton</b></a>
     <nav class="menu" aria-label="Principal">
+      <a href="#materiais">Agenda Fácil</a>
       <a href="#aulas">Aulas grátis</a>
       <a href="#conteudos">Conteúdos</a>
       <a class="rede" href="https://www.instagram.com/iacomton/" rel="noopener" aria-label="Instagram @iacomton" data-evento="instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2.2c-2.7 0-3 0-4 .1C4.3 2.4 2.4 4.3 2.3 8c-.1 1-.1 1.3-.1 4s0 3 .1 4c.1 3.7 2 5.6 5.7 5.7 1 .1 1.3.1 4 .1s3 0 4-.1c3.7-.1 5.6-2 5.7-5.7.1-1 .1-1.3.1-4s0-3-.1-4C21.6 4.3 19.7 2.4 16 2.3c-1-.1-1.3-.1-4-.1Zm0 1.8c2.6 0 2.9 0 4 .1 2.6.1 3.8 1.4 3.9 3.9.1 1 .1 1.3.1 4s0 2.9-.1 4c-.1 2.5-1.3 3.8-3.9 3.9-1 .1-1.4.1-4 .1s-2.9 0-4-.1c-2.6-.1-3.8-1.4-3.9-3.9-.1-1-.1-1.4-.1-4s0-2.9.1-4C4.2 5.5 5.4 4.2 8 4.1c1-.1 1.4-.1 4-.1Z"/></svg></a>
@@ -184,6 +237,25 @@
 </div>
 
 <main>
+  <section id="materiais" class="largura" aria-labelledby="t-materiais">
+    <h2 id="t-materiais" class="sr-only">Material completo</h2>
+    <ul class="vitrine">
+      <li><a href="/aulas/agenda-facil.html?origem=site" data-evento="material_agenda_facil">
+        <div>
+          <span class="rotulo">Material completo · Agenda Fácil</span>
+          <h3>Do zero ao seu <span>primeiro aplicativo</span> com IA</h3>
+          <p>Construa um app de agendamento de verdade com Claude Code, GitHub, Supabase e Vercel, passo a passo.</p>
+          <ul>
+            <li>Manual de 49 páginas, com os 36 prompts comentados</li>
+            <li>Código-fonte completo do app, com o banco Supabase</li>
+            <li>Para iniciantes: você aprende o que cada ferramenta faz</li>
+          </ul>
+          <div class="compra"><span class="preco"><b>R$ 67</b> ou até 6x sem juros</span><span class="cta">Conhecer o Agenda Fácil →</span></div>
+        </div>
+        <img src="/aulas/agenda-facil/manual-capa.webp" alt="Capa do manual Agenda Fácil" width="910" height="1287" loading="lazy">
+      </a></li>
+    </ul>
+  </section>
   <section id="aulas" class="largura" aria-labelledby="t-aulas">
     <div class="cabeca">
       <div>
@@ -192,7 +264,7 @@
         <p class="intro">Material curto, direto ao ponto e com prompts prontos para copiar. É só informar nome e e-mail.</p>
       </div>
     </div>
-    <ul class="aulas">
+    <ul class="aulas compacto">
       <li><a href="/aulas/drive.html?origem=site" data-evento="aula_drive">
         <span class="num"><span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></span><span class="rot">Aula 01</span><span class="tag">Grátis</span></span>
         <h3>Organize seus arquivos com IA</h3>
@@ -220,30 +292,12 @@
     </ul>
   </section>
 
-  <section id="materiais" class="largura" aria-labelledby="t-materiais">
-    <div class="cabeca">
-      <div>
-        <p class="sobre">Material completo</p>
-        <h2 id="t-materiais">Do zero ao seu primeiro aplicativo com IA</h2>
-        <p class="intro">Depois do guia grátis das 4 ferramentas, o projeto completo: manual, 36 prompts e o código-fonte de um app de agendamento.</p>
-      </div>
-    </div>
-    <ul class="aulas">
-      <li><a href="/aulas/agenda-facil.html?origem=site" data-evento="material_agenda_facil">
-        <span class="num"><span class="icone"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4M8 14h3M8 17h6"/></g></svg></span><span class="rot">Agenda Fácil</span><span class="tag">Completo</span></span>
-        <h3>Agenda Fácil: do zero ao seu primeiro aplicativo com IA</h3>
-        <p>Construa um app de agendamento com Claude Code, GitHub, Supabase e Vercel: manual de 49 páginas, 36 prompts e o código-fonte.</p>
-        <span class="baixar">Conhecer o material →</span>
-      </a></li>
-    </ul>
-  </section>
-
   <section id="conteudos" class="largura" aria-labelledby="t-cont">
     <div class="cabeca">
       <div>
         <p class="sobre">Instagram e YouTube</p>
-        <h2 id="t-cont">Todos os conteúdos</h2>
-        <p class="intro">Do mais novo para o mais antigo.</p>
+        <h2 id="t-cont">Conteúdos</h2>
+        <p class="intro">Os mais vistos em destaque e, logo abaixo, todos os conteúdos, do mais novo para o mais antigo.</p>
       </div>
       <div class="filtros" role="group" aria-label="Filtrar por rede">
         <button type="button" data-filtro="todos" aria-pressed="true">Todos</button>
@@ -251,8 +305,16 @@
         <button type="button" data-filtro="youtube" aria-pressed="false">YouTube</button>
       </div>
     </div>
-    <ul class="grade" id="posts" aria-live="polite"></ul>
-    <div class="mais" hidden><button type="button" id="mais">Ver mais conteúdos</button></div>
+    <div id="bloco-vistos" hidden>
+      <div class="subtitulo"><h3>Mais vistos</h3></div>
+      <ul class="destaques" id="vistos"></ul>
+    </div>
+    <div class="subtitulo">
+      <h3>Todos os conteúdos</h3>
+      <div class="setas"><button type="button" id="voltar" aria-label="Ver conteúdos anteriores">‹</button><button type="button" id="avancar" aria-label="Ver mais conteúdos">›</button></div>
+    </div>
+    <ul class="trilho" id="posts" aria-live="polite"></ul>
+    <p class="contagem" id="contagem"></p>
   </section>
 </main>
 
@@ -274,11 +336,14 @@
   var URL_POSTS = "https://xhqzakikatookphvjewy.supabase.co/functions/v1/iacomton-posts";
   var RESERVA = [{"rede": "youtube", "tipo": "video", "link": "https://www.youtube.com/watch?v=0qUHPU8XZXg", "imagem": "https://i.ytimg.com/vi/0qUHPU8XZXg/hqdefault.jpg", "titulo": "Claude Duet: a IA da Anthropic que prepara o seu dia (e só age com a sua aprovação)", "data": "2026-11-04T19:04:15+00:00"}, {"rede": "instagram", "tipo": "reel", "link": "https://www.instagram.com/reel/DfUhVCKCZh9/", "imagem": null, "titulo": "🤖 E se a IA preparasse o seu dia antes de você abrir o e-mail?", "data": "2026-11-04T13:07:19+0000"}, {"rede": "instagram", "tipo": "reel", "link": "https://www.instagram.com/reel/DfPXz9OjSbB/", "imagem": null, "titulo": "📂 Sua pasta Downloads virou uma bagunça?", "data": "2026-11-02T13:06:59+0000"}, {"rede": "youtube", "tipo": "short", "link": "https://www.youtube.com/watch?v=_SbLGEzz7QI", "imagem": "https://i.ytimg.com/vi/_SbLGEzz7QI/hqdefault.jpg", "titulo": "Converse com sua agenda: Google Calendar + ChatGPT 📅 #Shorts", "data": "2026-10-31T15:06:36+00:00"}, {"rede": "youtube", "tipo": "video", "link": "https://www.youtube.com/watch?v=1341fcYEYuY", "imagem": "https://i.ytimg.com/vi/1341fcYEYuY/hqdefault.jpg", "titulo": "Como organizar arquivos com IA e parar de perder tempo (Google Drive + ChatGPT)", "data": "2026-10-30T23:46:12+00:00"}, {"rede": "youtube", "tipo": "short", "link": "https://www.youtube.com/watch?v=B4VDZdxZhSA", "imagem": "https://i.ytimg.com/vi/B4VDZdxZhSA/hqdefault.jpg", "titulo": "Este vídeo foi feito com o meu avatar de IA 🤖 #Shorts", "data": "2026-10-30T15:07:03+00:00"}, {"rede": "instagram", "tipo": "carrossel", "link": "https://www.instagram.com/p/DfBeW7xCudO/", "imagem": null, "titulo": "📩 Um e-mail chegou. E se a IA ajudasse a resolver o resto?", "data": "2026-10-28T03:33:01+0000"}, {"rede": "instagram", "tipo": "reel", "link": "https://www.instagram.com/reel/DfBeA_AAN78/", "imagem": null, "titulo": "🚀 E se sua agenda tivesse inteligência artificial?", "data": "2026-10-28T03:29:51+0000"}, {"rede": "instagram", "tipo": "carrossel", "link": "https://www.instagram.com/p/DfBd5qQCmT1/", "imagem": null, "titulo": "📩 Recebi uma resposta por e-mail. Mas será que responderam tudo?", "data": "2026-10-28T03:29:09+0000"}, {"rede": "instagram", "tipo": "reel", "link": "https://www.instagram.com/reel/DfBT5OAgtAM/", "imagem": null, "titulo": "Este vídeo foi feito com o meu avatar de IA. 🤖", "data": "2026-10-28T02:01:28+0000"}];
   var lista = document.getElementById("posts");
-  var caixaMais = document.querySelector(".mais");
-  var filtro = "todos", posts = RESERVA, limite = 12;
+  var listaVistos = document.getElementById("vistos");
+  var blocoVistos = document.getElementById("bloco-vistos");
+  var contagem = document.getElementById("contagem");
+  var filtro = "todos", posts = RESERVA;
   var MESES = ["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
   function dataCurta(d) { return d.getDate() + " " + MESES[d.getMonth()] + " " + d.getFullYear(); }
   var ICONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4Z"/></svg>';
+  var NUM = new Intl.NumberFormat("pt-BR");
 
   function el(tag, attrs, texto) {
     var e = document.createElement(tag);
@@ -287,50 +352,91 @@
     return e;
   }
   function seguro(u) { return typeof u === "string" && /^https:\/\//.test(u) ? u : null; }
+  // Popularidade: YouTube = visualizações; Instagram = curtidas + comentários (a Meta não dá visualização sem permissão extra).
+  function bruto(p) { return p.rede === "youtube" ? (p.visualizacoes || 0) : (p.curtidas || 0) + (p.comentarios || 0); }
+  function rotuloNumero(p) {
+    if (p.rede === "youtube" && p.visualizacoes != null) return NUM.format(p.visualizacoes) + (p.visualizacoes === 1 ? " visualização" : " visualizações");
+    if (p.rede === "instagram" && (p.curtidas != null || p.comentarios != null)) {
+      var c = p.curtidas || 0, m = p.comentarios || 0;
+      return NUM.format(c) + (c === 1 ? " curtida" : " curtidas") + " · " + NUM.format(m) + (m === 1 ? " comentário" : " comentários");
+    }
+    return null;
+  }
+
+  function cartao(p, rank) {
+    var link = seguro(p.link); if (!link) return null;
+    var li = el("li", { "class": "post" });
+    var a = el("a", { href: link, rel: "noopener", target: "_blank" });
+    var deitado = p.rede === "youtube" && p.tipo === "video";
+    var th = el("div", { "class": "thumb" + (deitado ? " h" : "") });
+    if (rank) th.appendChild(el("span", { "class": "rank" }, "#" + rank));
+    var img = seguro(p.imagem);
+    if (img) {
+      if (deitado) th.appendChild(el("img", { src: img, alt: "", "class": "fundo", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer", "aria-hidden": "true" }));
+      th.appendChild(el("img", { src: img, alt: "", "class": "frente", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" }));
+    } else {
+      var v = el("span", { "class": "vazia" }); v.innerHTML = ICONE; th.appendChild(v);
+    }
+    a.appendChild(th);
+    var info = el("div", { "class": "info" });
+    var d = new Date(p.data);
+    var meta = el("span", { "class": "meta " + p.rede });
+    meta.appendChild(el("span", { "class": "ponto", "aria-hidden": "true" }));
+    meta.appendChild(document.createTextNode((p.rede === "youtube" ? "YouTube" : "Instagram") + (isNaN(d) ? "" : " · " + dataCurta(d))));
+    info.appendChild(meta);
+    var titulo = (p.titulo || "").replace(/\s*#shorts\b/gi, "").trim();
+    info.appendChild(el("p", null, titulo || "Novo conteúdo do IA com Ton"));
+    var n = rotuloNumero(p);
+    if (rank && n) info.appendChild(el("span", { "class": "num-vistos" }, n));
+    a.appendChild(info);
+    a.addEventListener("click", function () { if (window.iacomtonEvento) window.iacomtonEvento("ViewContent", { content_name: p.rede + "_" + p.tipo }); });
+    li.appendChild(a);
+    return li;
+  }
 
   function desenhar() {
-    var itens = posts.filter(function (p) { return filtro === "todos" || p.rede === filtro; });
+    var itens = posts.filter(function (p) { return filtro === "todos" || p.rede === filtro; })
+      .sort(function (a, b) { return a.data < b.data ? 1 : -1; });
+    // Mais vistos: cada rede comparada com o seu próprio melhor (0 a 1), para YouTube e Instagram dividirem o destaque.
+    var maior = {};
+    itens.forEach(function (p) { maior[p.rede] = Math.max(maior[p.rede] || 0, bruto(p)); });
+    var vistos = itens.filter(function (p) { return bruto(p) > 0; })
+      .sort(function (a, b) { return bruto(b) / maior[b.rede] - bruto(a) / maior[a.rede] || bruto(b) - bruto(a); })
+      .slice(0, 4);
+    listaVistos.textContent = "";
+    vistos.forEach(function (p, i) { var c = cartao(p, i + 1); if (c) listaVistos.appendChild(c); });
+    blocoVistos.hidden = vistos.length < 2;
+    // Todos os conteúdos: trilho com setas, do mais novo para o mais antigo.
     lista.textContent = "";
-    if (!itens.length) { lista.appendChild(el("li", { "class": "vazio" }, "Nada por aqui ainda.")); caixaMais.hidden = true; return; }
-    itens.slice(0, limite).forEach(function (p) {
-      var link = seguro(p.link); if (!link) return;
-      var li = el("li", { "class": "post" });
-      var a = el("a", { href: link, rel: "noopener", target: "_blank" });
-      var deitado = p.rede === "youtube" && p.tipo === "video";
-      var th = el("div", { "class": "thumb" + (deitado ? " h" : "") });
-      var img = seguro(p.imagem);
-      if (img) {
-        if (deitado) th.appendChild(el("img", { src: img, alt: "", "class": "fundo", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer", "aria-hidden": "true" }));
-        th.appendChild(el("img", { src: img, alt: "", "class": "frente", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" }));
-      } else {
-        var v = el("span", { "class": "vazia" }); v.innerHTML = ICONE; th.appendChild(v);
-      }
-      a.appendChild(th);
-      var info = el("div", { "class": "info" });
-      var d = new Date(p.data);
-      if (!isNaN(d)) info.appendChild(el("span", { "class": "meta" }, dataCurta(d)));
-      var titulo = (p.titulo || "").replace(/\s*#shorts\b/gi, "").trim();
-      info.appendChild(el("p", null, titulo || "Novo conteúdo do IA com Ton"));
-      a.appendChild(info);
-      a.addEventListener("click", function () { if (window.iacomtonEvento) window.iacomtonEvento("ViewContent", { content_name: p.rede + "_" + p.tipo }); });
-      li.appendChild(a); lista.appendChild(li);
-    });
-    caixaMais.hidden = itens.length <= limite;
+    if (!itens.length) { lista.appendChild(el("li", { "class": "vazio" }, "Nada por aqui ainda.")); contagem.textContent = ""; return; }
+    itens.forEach(function (p) { var c = cartao(p, 0); if (c) lista.appendChild(c); });
+    contagem.textContent = itens.length + (itens.length === 1 ? " conteúdo" : " conteúdos") + " · role para o lado para ver todos";
+    lista.scrollLeft = 0;
+    atualizarSetas();
   }
+
+  var voltar = document.getElementById("voltar"), avancar = document.getElementById("avancar");
+  function atualizarSetas() {
+    voltar.disabled = lista.scrollLeft <= 4;
+    avancar.disabled = lista.scrollLeft + lista.clientWidth >= lista.scrollWidth - 4;
+  }
+  voltar.addEventListener("click", function () { lista.scrollBy({ left: -lista.clientWidth * 0.9, behavior: "smooth" }); });
+  avancar.addEventListener("click", function () { lista.scrollBy({ left: lista.clientWidth * 0.9, behavior: "smooth" }); });
+  lista.addEventListener("scroll", function () { window.requestAnimationFrame(atualizarSetas); }, { passive: true });
+  window.addEventListener("resize", atualizarSetas);
 
   document.querySelectorAll("[data-filtro]").forEach(function (b) {
     b.addEventListener("click", function () {
-      filtro = b.getAttribute("data-filtro"); limite = 12;
+      filtro = b.getAttribute("data-filtro");
       document.querySelectorAll("[data-filtro]").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
       desenhar();
     });
   });
-  document.getElementById("mais").addEventListener("click", function () { limite += 12; desenhar(); });
 
   document.querySelectorAll("[data-evento]").forEach(function (a) {
     a.addEventListener("click", function () {
       var ev = a.getAttribute("data-evento");
-      if (window.iacomtonEvento) window.iacomtonEvento(/^aula_/.test(ev) ? "ViewContent" : "Contact", { content_name: ev });
+      if (window.iacomtonEvento) window.iacomtonEvento(/^(aula_|material_)/.test(ev) ? "ViewContent" : "Contact", { content_name: ev });
     });
   });
 
