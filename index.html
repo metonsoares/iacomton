@@ -123,20 +123,20 @@
 
   /* Vitrine dos materiais completos (pagos) */
   .vitrine{list-style:none;padding:0;margin:0;display:grid;gap:20px}
-  .vitrine a{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center;text-decoration:none;color:#fff;border-radius:24px;padding:32px 36px;background:radial-gradient(90% 140% at 100% 0%,#8A3F22 0%,#2B2420 48%,#1F1A17 100%);border:1px solid rgba(232,135,90,.35);box-shadow:0 24px 60px rgba(31,26,23,.25);transition:transform .15s,box-shadow .15s}
+  .vitrine a{display:grid;grid-template-columns:1.35fr .65fr;gap:28px;align-items:center;text-decoration:none;color:#fff;border-radius:24px;padding:28px 36px;background:radial-gradient(70% 120% at 100% 0%,#873E1E 0%,#3A2419 45%,#1D1712 100%);border:1px solid rgba(232,135,90,.35);box-shadow:0 24px 60px rgba(31,26,23,.25);transition:transform .15s,box-shadow .15s}
   .vitrine a:hover{transform:translateY(-2px);box-shadow:0 30px 70px rgba(31,26,23,.35)}
   .vitrine .rotulo{display:inline-block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#FFD3BE;background:rgba(232,135,90,.18);border:1px solid rgba(232,135,90,.4);padding:4px 12px;border-radius:999px}
-  .vitrine h3{font-size:30px;line-height:1.12;margin:14px 0 10px;letter-spacing:-.3px}
-  .vitrine h3 span{color:#E8875A}
+  .vitrine h3{font-size:38px;line-height:1.08;margin:14px 0 10px;letter-spacing:-.5px;font-weight:900}
+  .vitrine h3 span{color:#E8875A;display:block}
   .vitrine p{color:#E9DDD2;margin:0 0 14px;font-size:16px}
   .vitrine ul{list-style:none;padding:0;margin:0 0 20px;display:grid;gap:6px;color:#E9DDD2;font-size:15px}
   .vitrine ul li::before{content:"✓ ";color:#E8875A;font-weight:900}
   .vitrine .compra{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-  .vitrine .preco{font-size:15px;color:#FFD3BE}
-  .vitrine .preco b{font-size:26px;color:#fff;margin-right:4px}
-  .vitrine .cta{display:inline-flex;align-items:center;gap:8px;background:#C8623B;color:#fff;font-weight:800;padding:13px 20px;border-radius:12px}
+  .vitrine .preco{display:grid;color:#E9DDD2;font-size:15px;line-height:1.2}
+  .vitrine .preco b{font-size:34px;color:#fff;font-weight:900;letter-spacing:-.5px}
+  .vitrine .cta{display:inline-flex;align-items:center;gap:8px;background:#C8623B;color:#fff;font-weight:800;font-size:17px;padding:15px 24px;border-radius:14px;box-shadow:0 10px 24px rgba(200,98,59,.35)}
   .vitrine a:hover .cta{background:#D9714A}
-  .vitrine img{width:100%;height:auto;max-width:230px;justify-self:center;border-radius:10px;transform:rotate(3deg);box-shadow:0 22px 50px rgba(0,0,0,.45)}
+  .vitrine img{width:100%;height:auto;max-width:300px;justify-self:center;-webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect}
 
   /* Aulas grátis mais compactas: 4 por linha no computador */
   .aulas.compacto{grid-template-columns:repeat(4,1fr);gap:16px}
@@ -176,7 +176,7 @@
     .grade{grid-template-columns:repeat(3,1fr)}
     .destaques{grid-template-columns:repeat(2,1fr)}
     .vitrine a{grid-template-columns:1fr;padding:26px 22px}
-    .vitrine img{order:-1;max-width:150px;justify-self:start}
+    .vitrine img{order:-1;max-width:200px;justify-self:center;margin:-8px 0 -12px}
   }
   @media (max-width:640px){
     .menu a:not(.rede){display:none}
@@ -192,7 +192,7 @@
     .post p{font-size:14px}
     .aulas.compacto{grid-template-columns:1fr}
     .destaques{grid-template-columns:repeat(2,1fr);gap:12px}
-    .vitrine h3{font-size:24px}
+    .vitrine h3{font-size:28px}
     .trilho .post{flex-basis:62vw}
     .setas{display:none}
   }
@@ -243,16 +243,16 @@
       <li><a href="/aulas/agenda-facil.html?origem=site" data-evento="material_agenda_facil">
         <div>
           <span class="rotulo">Material completo · Agenda Fácil</span>
-          <h3>Do zero ao seu <span>primeiro aplicativo</span> com IA</h3>
-          <p>Construa um app de agendamento de verdade com Claude Code, GitHub, Supabase e Vercel, passo a passo.</p>
+          <h3>Do zero ao seu primeiro <span>aplicativo com IA</span></h3>
+          <p>Crie seu app de agendamento com Claude Code, GitHub, Supabase e Vercel, passo a passo.</p>
           <ul>
-            <li>Manual de 49 páginas, com os 36 prompts comentados</li>
-            <li>Código-fonte completo do app, com o banco Supabase</li>
-            <li>Para iniciantes: você aprende o que cada ferramenta faz</li>
+            <li>Manual de 49 páginas + 36 prompts comentados</li>
+            <li>Código-fonte completo + banco de dados Supabase</li>
+            <li>Explicações passo a passo para iniciantes</li>
           </ul>
-          <div class="compra"><span class="preco"><b>R$ 67</b> ou até 6x sem juros</span><span class="cta">Conhecer o Agenda Fácil →</span></div>
+          <div class="compra"><span class="preco"><b>R$ 67,00</b><small>ou até 6x sem juros</small></span><span class="cta">Quero criar meu aplicativo →</span></div>
         </div>
-        <img src="/aulas/agenda-facil/manual-capa.webp" alt="Capa do manual Agenda Fácil" width="910" height="1287" loading="lazy">
+        <img src="/aulas/agenda-facil/livro-vitrine.webp" alt="Livro do manual Agenda Fácil: Do zero ao seu primeiro aplicativo com IA" width="455" height="497" loading="lazy">
       </a></li>
     </ul>
   </section>
