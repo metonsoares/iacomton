@@ -136,7 +136,7 @@
         <span class="selo">PDF + prompts + código</span>
         <h1>Agenda Fácil: <span>do zero ao seu primeiro aplicativo com IA</span></h1>
         <p class="sub">Aprenda na prática como Claude Code, GitHub, Supabase e Vercel trabalham juntos, construindo um app de agendamento com serviços, horários, reservas e painel administrativo.</p>
-        <p class="sub" style="font-size:16px;margin-top:-10px">Compra única · <b style="color:#fff">R$ 67,00</b> no lançamento</p>
+        <p class="sub" style="font-size:16px;margin-top:-10px">Compra única · <b style="color:#fff">R$ 67,00</b> no lançamento, ou em até 6x sem juros no cartão</p>
         <div class="acoes">
           <a class="btn" href="#comprar">Ver preço e como comprar</a>
           <a class="btn claro" href="#conteudo">O que vem no material</a>
@@ -345,7 +345,7 @@
   <div class="largura">
     <h2>Perguntas frequentes</h2>
     <details><summary>Recebo atualizações? É assinatura?</summary><p>Não é assinatura. Você compra uma vez e recebe a versão 1.0 do material (manual, prompts e código-fonte). Não há atualizações incluídas: se surgirem novos materiais ou novas versões, eles serão vendidos à parte, cada um com o seu preço.</p></details>
-    <details><summary>Quanto custa e como pago?</summary><p>No lançamento, R$ 67,00, em pagamento único e sem mensalidade, por Pix ou cartão de crédito à vista, processado pelo Asaas. Depois do lançamento, o preço regular será R$ 97,00. O valor não inclui as assinaturas das ferramentas (veja "Requisitos e custos externos").</p></details>
+    <details><summary>Quanto custa e como pago?</summary><p>No lançamento, R$ 67,00, em pagamento único e sem mensalidade, por Pix ou cartão de crédito (à vista ou em até 6x sem juros), processado pelo Asaas. Depois do lançamento, o preço regular será R$ 97,00. O valor não inclui as assinaturas das ferramentas (veja "Requisitos e custos externos").</p></details>
     <details><summary>Preciso saber programar?</summary><p>Não precisa ser programador, mas precisa ter paciência para seguir comandos, ler mensagens de erro e revisar o que a IA mudou. O manual parte do zero e explica cada ferramenta.</p></details>
     <details><summary>É curso em vídeo?</summary><p>Não. É um material em PDF com prompts e código-fonte, para estudar no seu ritmo.</p></details>
     <details><summary>Como recebo o material?</summary><p>Por e-mail, em duas etapas. A Etapa 1 (manual até a Parte 06, os prompts dessas partes e o app em modo demonstração) chega logo depois que o pagamento é confirmado: no Pix costuma ser em instantes; no cartão, assim que a operadora aprova. A Etapa 2 (manual completo, os 36 prompts e o código-fonte completo) chega no 8º dia depois da compra.</p></details>
@@ -368,7 +368,7 @@
           <li>Biblioteca de 36 prompts em arquivo editável</li>
           <li>Código-fonte do app, scripts de apoio (SQL e testes) e instruções práticas</li>
           <li>Compra única e acesso digital: versão 1.0, sem mensalidade nem assinatura</li>
-          <li>Pix ou cartão de crédito à vista, pelo Asaas</li>
+          <li>Pix ou cartão de crédito, à vista ou em até 6x sem juros, pelo Asaas</li>
           <li>Entrega por e-mail em duas etapas: Etapa 1 na hora, Etapa 2 no 8º dia (licença de uso pessoal)</li>
           <li>Reembolso em até 7 dias</li>
         </ul>
@@ -376,7 +376,7 @@
       <div class="caixa-preco">
         <p class="preco-nota" style="margin:0;font-weight:700;color:var(--terra)">Preço de lançamento</p>
         <p class="preco" id="preco">R$ <span id="preco-valor">—</span> <small id="preco-tipo">preço a definir</small></p>
-        <p class="preco-nota" id="preco-nota">Pagamento único, sem mensalidade. Pix ou cartão de crédito à vista.<br><span id="preco-regular-txt"></span></p>
+        <p class="preco-nota" id="preco-nota">Pagamento único, sem mensalidade. Pix, ou cartão à vista ou em até <b>6x sem juros</b>.<br><span id="preco-regular-txt"></span></p>
 
         <div id="previa">
           <button class="btn" type="button" disabled aria-disabled="true">COMPRAR AGORA</button>
@@ -407,6 +407,8 @@
             <div class="espera"><span class="ponto" aria-hidden="true"></span><span id="espera-txt">Aguardando o pagamento. Esta página atualiza sozinha.</span></div>
             <button id="pix-de-novo" type="button" class="secundario" hidden>Gerar o QR Code do Pix de novo</button>
             <p class="dica">ou</p>
+            <label for="parcelas" style="align-self:flex-start;margin-top:4px">Cartão de crédito</label>
+            <select id="parcelas" style="width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--linha);border-radius:10px;background:#fff"></select>
             <button id="cartao" type="button" class="secundario">Pagar com cartão de crédito</button>
           </div>
           <div id="msg2" class="msg" role="status" aria-live="polite"></div>
@@ -483,6 +485,19 @@
     document.getElementById("ja-comprei").hidden = false;
   }
 
+  // Parcelas no cartão (até 6x sem juros). O Asaas divide o total e põe a diferença dos centavos na última parcela.
+  (function () {
+    var sel = document.getElementById("parcelas");
+    if (!sel || !(PRECO > 0)) return;
+    var total = Math.round(PRECO * 100);
+    function brl(c) { return "R$ " + (c / 100).toFixed(2).replace(".", ","); }
+    for (var n = 1; n <= 6; n++) {
+      var o = document.createElement("option"), base = Math.floor(total / n), ultima = total - base * (n - 1);
+      o.value = String(n);
+      o.textContent = n === 1 ? "À vista: " + brl(total) : n + "x sem juros de " + brl(base) + (ultima !== base ? " (última " + brl(ultima) + ")" : "");
+      sel.appendChild(o);
+    }
+  })();
   function mostrar(el, tipo, texto) { el.className = "msg " + tipo; el.textContent = texto; }
   function so(d) { return String(d || "").replace(/\D/g, ""); }
   function cpfValido(c) {
@@ -595,7 +610,7 @@
   document.getElementById("cartao").addEventListener("click", function () {
     var b = this;
     b.disabled = true; b.textContent = "Abrindo a página segura do Asaas…";
-    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "cartao", pedido: pedido, chave: chave }) })
+    fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ acao: "cartao", pedido: pedido, chave: chave, parcelas: Number(document.getElementById("parcelas").value) || 1 }) })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j || {} }; }); })
       .then(function (res) {
         var url = res.j.url;
