@@ -56,7 +56,7 @@
     if (window.fbq) window.fbq("track", nome, dados || {});
     if (window.gtag) {
       // Nomes recomendados do GA4 (purchase usa transaction_id = id do pedido, que deduplica).
-      var ga = { Purchase: "purchase", InitiateCheckout: "begin_checkout", Lead: "generate_lead" }[nome] || nome;
+      var ga = { Purchase: "purchase", InitiateCheckout: "begin_checkout", Lead: "generate_lead", ViewContent: "view_item" }[nome] || nome;
       window.gtag("event", ga, dados || {});
     }
   }

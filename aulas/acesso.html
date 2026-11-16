@@ -114,7 +114,7 @@
     if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(email)) { msg.className = "msg erro"; msg.textContent = "Confira o e-mail."; return; }
     b.disabled = true;
     fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ acao: "reenviar", email: email, aula: aula || "agenda-facil", site: document.getElementById("site").value }) })
+      body: JSON.stringify({ acao: "reenviar", email: email, aula: aula, site: document.getElementById("site").value }) })
       .then(function (r) { return r.json(); })
       .then(function (j) { msg.className = j.ok ? "msg ok" : "msg erro"; msg.textContent = j.msg || j.erro || "Não deu certo agora."; })
       .catch(function () { msg.className = "msg erro"; msg.textContent = "Não deu certo agora. Tente de novo em instantes."; })
