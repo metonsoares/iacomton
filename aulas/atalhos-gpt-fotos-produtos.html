@@ -3,8 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<!-- MODO PRÉVIA (16/11/2026): vendas fechadas, noindex, fora da home e do sitemap. Abrir só com o OK expresso do dono. -->
-<meta name="robots" content="noindex,nofollow">
+<!-- VENDAS ABERTAS em 16/11/2026 com o OK expresso do dono ("abre as vendas do produto de e-commerce"). -->
 <title>Atalhos GPT para Edição de Fotos de Produtos | IA com Ton</title>
 <meta name="description" content="Aprenda 18 comandos e copie a configuração para usar em Projetos ChatGPT. Guia digital para fotos de produtos de loja virtual e marketplace por R$ 29,90.">
 <link rel="canonical" href="https://iacomton.com.br/aulas/atalhos-gpt-fotos-produtos.html">
@@ -363,8 +362,8 @@
   // MODO_PREVIA = true: página sem checkout (vendas fechadas). Só mudar para false com o OK expresso do dono, depois de:
   //   update iacomton_aulas set ativa=true where slug='atalhos-gpt-fotos-produtos' (preço 2990 já gravado),
   //   tirar o <meta robots noindex>, pôr no sitemap.xml e (se o dono quiser) um cartão na home.
-  // Preço PROPOSTO (16/11/2026): R$ 29,90, pagamento único, sem preço "de/por". Aguarda aprovação do dono.
-  var MODO_PREVIA = true; // PRÉVIA: vendas fechadas até o OK expresso do dono
+  // Preço do dono (16/11/2026): R$ 29,90, pagamento único, sem preço "de/por".
+  var MODO_PREVIA = false; // vendas abertas (OK do dono, 16/11/2026)
   var PRECO = 29.9;
   var AULA = "atalhos-gpt-fotos-produtos";
   var NOME_PRODUTO = "Atalhos GPT para Edição de Fotos de Produtos";
@@ -568,8 +567,8 @@
 ROTEIRO PARA ABRIR AS VENDAS (somente com OK expresso do dono do produto, preço, termos e testes):
 1. [FEITO 16/11/2026] Arquivos v1.0 no bucket privado iacomton-produtos/atalhos-gpt-fotos-produtos/v1.0/ e em iacomton_aula_arquivos (SHA-256 conferido).
 2. [FEITO] iacomton_aulas: slug 'atalhos-gpt-fotos-produtos', preco_centavos=2990 (proposto), ativa=false.
-3. SQL: update iacomton_aulas set ativa=true where slug='atalhos-gpt-fotos-produtos';
-4. Aqui: MODO_PREVIA = false; tirar o <meta robots noindex>.
+3. [FEITO 16/11/2026] ativa=true.
+4. [FEITO] MODO_PREVIA=false, sem noindex.
 5. Acrescentar ao sitemap.xml, ao catálogo da coleção e (se o dono quiser) um cartão em #materiais na home.
 6. Compra real de ponta a ponta autorizada pelo dono (e estorno logo depois).
 -->
