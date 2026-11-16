@@ -139,6 +139,7 @@
   .vitrine a.banner{display:block;padding:0;background:#1D1712;border:0;overflow:hidden}
   .vitrine a.banner img{display:block;width:100%;max-width:none;height:auto;-webkit-mask-image:none;mask-image:none}
   .vitrine .so-mobile{display:none}
+  .vitrine a.atalhos img{max-width:250px;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.45);-webkit-mask-image:none;mask-image:none;transform:rotate(2deg)}
   .vitrine img{width:100%;height:auto;max-width:300px;justify-self:center;-webkit-mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect}
 
   /* Aulas grátis mais compactas: 4 por linha no computador */
@@ -216,6 +217,8 @@
     .topo .largura{padding-bottom:40px}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  @media (max-width:900px){.vitrine a.atalhos img{max-width:170px;margin:0 0 4px}}
+  @media (max-width:640px){.vitrine a.atalhos img{max-width:130px}}
 </style>
 <script src="/rastreio.js" defer></script>
 </head>
@@ -224,7 +227,7 @@
   <div class="largura">
     <a class="logo" href="/" aria-label="IA com Ton, página inicial"><img src="/logo.png" alt="" width="36" height="36">IA com <b>Ton</b></a>
     <nav class="menu" aria-label="Principal">
-      <a href="#materiais">Agenda Fácil</a>
+      <a href="#materiais">Materiais</a>
       <a href="#aulas">Aulas grátis</a>
       <a href="#conteudos">Conteúdos</a>
       <a class="rede" href="https://www.instagram.com/iacomton/" rel="noopener" aria-label="Instagram @iacomton" data-evento="instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm0 8.2a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4ZM17.3 5.5a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4ZM12 2.2c-2.7 0-3 0-4 .1C4.3 2.4 2.4 4.3 2.3 8c-.1 1-.1 1.3-.1 4s0 3 .1 4c.1 3.7 2 5.6 5.7 5.7 1 .1 1.3.1 4 .1s3 0 4-.1c3.7-.1 5.6-2 5.7-5.7.1-1 .1-1.3.1-4s0-3-.1-4C21.6 4.3 19.7 2.4 16 2.3c-1-.1-1.3-.1-4-.1Zm0 1.8c2.6 0 2.9 0 4 .1 2.6.1 3.8 1.4 3.9 3.9.1 1 .1 1.3.1 4s0 2.9-.1 4c-.1 2.5-1.3 3.8-3.9 3.9-1 .1-1.4.1-4 .1s-2.9 0-4-.1c-2.6-.1-3.8-1.4-3.9-3.9-.1-1-.1-1.4-.1-4s0-2.9.1-4C4.2 5.5 5.4 4.2 8 4.1c1-.1 1.4-.1 4-.1Z"/></svg></a>
@@ -275,6 +278,20 @@
           <div class="compra"><span class="preco"><b>R$ 67,00</b><small>ou até 6x sem juros</small></span><span class="cta">Quero criar meu aplicativo →</span></div>
         </div>
         <img src="/aulas/agenda-facil/livro-vitrine.webp" alt="Livro do manual Agenda Fácil: Do zero ao seu primeiro aplicativo com IA" width="455" height="497" loading="lazy">
+      </a></li>
+      <li><a class="atalhos" href="/aulas/atalhos-gpt-fotos-cardapio.html?origem=site" data-evento="material_atalhos_gpt">
+        <div>
+          <span class="rotulo">Novo · Guia em PDF</span>
+          <h3>Atalhos GPT para <span>fotos de cardápio</span></h3>
+          <p>18 comandos curtos para orientar a edição de fotos de pratos, delivery e menus digitais no ChatGPT.</p>
+          <ul>
+            <li>Guia em PDF de 13 páginas</li>
+            <li>Configuração pronta para o seu Projeto do ChatGPT</li>
+            <li>Prompts completos para copiar e adaptar</li>
+          </ul>
+          <div class="compra"><span class="preco"><b>R$ 29,90</b><small>pagamento único</small></span><span class="cta">Quero os atalhos →</span></div>
+        </div>
+        <img src="/aulas/atalhos-gpt-fotos-cardapio/capa.webp" alt="Capa do guia Atalhos GPT para fotos de cardápio, do IA com Ton" width="820" height="1160" loading="lazy">
       </a></li>
     </ul>
   </section>
