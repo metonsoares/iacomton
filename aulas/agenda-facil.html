@@ -79,8 +79,8 @@
   .compra .lista li{color:#EADFD5}
   .compra .lista li::before{color:var(--terra2)}
   .caixa-preco{background:var(--branco);color:var(--texto);border-radius:18px;padding:24px}
-  .preco{font-size:40px;font-weight:900;margin:2px 0 0;color:var(--preto)}
-  .preco small{font-size:15px;font-weight:600;color:var(--suave)}
+  .preco{font-size:40px;font-weight:900;margin:2px 0 0;color:var(--preto);line-height:1.15}
+  .preco small{font-size:15px;font-weight:600;color:var(--suave);white-space:nowrap}
   .preco small.pre{font-size:22px;font-weight:800;color:var(--preto)}
   .preco-de{font-size:17px;font-weight:700;color:var(--suave);margin:6px 0 0}
   .preco-de s{text-decoration-color:var(--terra);text-decoration-thickness:2px}
@@ -113,6 +113,16 @@
   .dica{font-size:14px;color:var(--suave);margin:10px 0 0}
   .rodape{background:var(--preto);color:#BFB1A5;font-size:13px;padding:28px 0 40px}
   .rodape a{color:#E9DDD2}
+  .garantias{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:#E9DDD2}
+  .garantias li::before{content:"✓ ";color:var(--terra2);font-weight:900}
+  .cta-meio{background:var(--preto);color:#fff;border-radius:18px;padding:20px 24px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:28px}
+  .cta-meio p{margin:0;font-size:15px;color:#EADFD5}
+  .cta-meio b{color:#fff;font-size:20px}
+  .autor{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center}
+  .autor img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:0;box-shadow:none}
+  .autor p{margin:0;color:var(--suave)}
+  .passo{font-size:13px;font-weight:800;color:var(--terra);letter-spacing:.5px;text-transform:uppercase;margin:0 0 2px}
+  .barra-fixa{display:none}
   @media (max-width:900px){
     .heroi,.compra,.galeria-app{grid-template-columns:1fr}
     .capa-heroi{margin:0 auto;max-width:280px}
@@ -127,12 +137,19 @@
     section{padding:44px 0}
     .compra{padding:22px 16px}
     .btn{width:100%}
+    body{padding-bottom:76px}
+    .barra-fixa{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--preto);color:#fff;padding:10px 14px;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 -6px 20px rgba(0,0,0,.3)}
+    .barra-fixa[hidden]{display:none}
+    .barra-fixa span{font-size:13px;line-height:1.25;color:#EADFD5}
+    .barra-fixa b{display:block;color:#fff;font-size:17px}
+    .barra-fixa .btn{width:auto;padding:12px 18px;font-size:16px;flex:none}
+    .autor{grid-template-columns:1fr}
   }
 </style>
 </head>
 <body>
 
-<div id="faixa-previa" class="faixa-previa">Página em preparação: as vendas ainda não estão abertas. A data de lançamento será anunciada no @iacomton.</div>
+<div id="faixa-previa" class="faixa-previa" hidden>Página em preparação: as vendas ainda não estão abertas. A data de lançamento será anunciada no @iacomton.</div>
 
 <!-- 1. Título -->
 <header class="topo">
@@ -148,6 +165,11 @@
           <a class="btn" href="#comprar">Compre aqui</a>
           <a class="btn claro" href="#conteudo">O que vem no material</a>
         </div>
+        <ul class="garantias">
+          <li>Pix ou cartão em até 6x sem juros</li>
+          <li>Reembolso em até 7 dias</li>
+          <li>Entrega por e-mail</li>
+        </ul>
       </div>
       <img class="capa-heroi" src="agenda-facil/manual-capa.webp" width="910" height="1287" alt="Capa do manual Agenda Fácil, do zero ao seu primeiro aplicativo com IA">
     </div>
@@ -189,6 +211,10 @@
         <li>Segurança básica: chaves, segredos e o que nunca vai para o navegador</li>
         <li>Um roteiro de revisão antes de colocar um app de verdade no ar</li>
       </ul>
+    </div>
+    <div class="cta-meio">
+      <p><b>De <s>R$ 129,00</s> por R$ 67,00</b><br>ou 6x de R$ 11,16 sem juros · compra única · reembolso em até 7 dias</p>
+      <a class="btn" href="#comprar">Compre aqui</a>
     </div>
   </div>
 </section>
@@ -237,6 +263,10 @@
         <figure><img class="corte" src="agenda-facil/app-admin.webp" width="1200" height="2118" loading="lazy" alt="Painel administrativo do Agenda Fácil com serviços cadastrados, bloqueio de horários e reservas recebidas" style="object-position:bottom"><figcaption>Painel do administrador: serviços, bloqueios e reservas recebidas.</figcaption></figure>
       </div>
       <figure><img class="cel" src="agenda-facil/app-celular.webp" width="390" height="2510" loading="lazy" alt="Agenda Fácil aberto na largura de um celular"><figcaption>A mesma tela no celular.</figcaption></figure>
+    </div>
+    <div class="cta-meio">
+      <p><b>De <s>R$ 129,00</s> por R$ 67,00</b><br>ou 6x de R$ 11,16 sem juros · compra única · reembolso em até 7 dias</p>
+      <a class="btn" href="#comprar">Compre aqui</a>
     </div>
   </div>
 </section>
@@ -322,8 +352,22 @@
   </div>
 </section>
 
-<!-- 11. Transparência -->
+<!-- 10b. Quem fez -->
 <section class="alt">
+  <div class="largura">
+    <h2>Quem fez este material</h2>
+    <div class="cartao autor">
+      <img src="../ton.jpg" width="480" height="480" loading="lazy" alt="Ton, criador do IA com Ton">
+      <div>
+        <p><b style="color:var(--texto)">Ton, do IA com Ton.</b> No <a href="https://www.instagram.com/iacomton/">Instagram</a> e no <a href="https://www.youtube.com/@iacomton">YouTube</a> eu mostro inteligência artificial na prática para quem está começando e para quem empreende. O Agenda Fácil reúne, em um só projeto, o caminho que eu uso para criar aplicativos com Claude Code, GitHub, Supabase e Vercel.</p>
+        <p style="margin-top:8px">Dúvida antes de comprar? Fale comigo no Direct do @iacomton ou em <a href="mailto:contato@iacomton.com.br">contato@iacomton.com.br</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Transparência -->
+<section>
   <div class="largura">
     <h2>O que este material não promete</h2>
     <div class="aviso">
@@ -334,7 +378,7 @@
 </section>
 
 <!-- 12. Pagamento, entrega, suporte e reembolso -->
-<section>
+<section class="alt">
   <div class="largura">
     <h2>Pagamento, entrega, suporte e reembolso</h2>
     <div class="grade2">
@@ -348,7 +392,7 @@
 </section>
 
 <!-- 13. FAQ -->
-<section class="alt">
+<section>
   <div class="largura">
     <h2>Perguntas frequentes</h2>
     <details><summary>Recebo atualizações? É assinatura?</summary><p>Não é assinatura. Você compra uma vez e recebe a versão 1.0 do material (manual, prompts e código-fonte). Não há atualizações incluídas: se surgirem novos materiais ou novas versões, eles serão vendidos à parte, cada um com o seu preço.</p></details>
@@ -382,21 +426,23 @@
       </div>
       <div class="caixa-preco">
         <p class="preco-nota" style="margin:0;font-weight:700;color:var(--terra)">Preço de lançamento</p>
-        <p class="preco-de" id="preco-de" hidden></p>
-        <p class="preco" id="preco">R$ <span id="preco-valor">—</span> <small id="preco-tipo">preço a definir</small></p>
-        <p class="preco-nota" id="preco-nota"><span id="preco-nota-txt">Pagamento único, sem mensalidade. Pix, ou cartão à vista ou em até <b>6x sem juros</b>.</span><br><span id="preco-regular-txt"></span></p>
+        <p class="preco-de" id="preco-de">De <s>R$ 129,00</s> por</p>
+        <p class="preco" id="preco"><small class="pre">6x de </small>R$ 11,16<small> sem juros</small></p>
+        <p class="preco-nota" id="preco-nota"><span id="preco-nota-txt">Total R$ 67,00 no cartão, sem mensalidade. Ou R$ 67,00 à vista no Pix ou no cartão.</span><br><span id="preco-regular-txt">Depois do lançamento, o preço regular será R$ 129,00.</span></p>
 
-        <div id="previa">
+        <div id="previa" hidden>
           <button class="btn" type="button" disabled aria-disabled="true">COMPRAR AGORA</button>
           <p class="seguro">Vendas ainda não abertas. A data de lançamento será anunciada no <a href="https://www.instagram.com/iacomton/">@iacomton</a>.</p>
         </div>
 
-        <form id="form" novalidate hidden>
+        <form id="form" novalidate>
+          <p class="passo">Passo 1 de 2 · seus dados</p>
+          <p class="dica" style="margin:0 0 4px">No passo 2 você escolhe Pix ou cartão. Você só paga lá.</p>
           <label for="nome">Nome completo</label>
           <input id="nome" name="nome" type="text" autocomplete="name" maxlength="80" required>
           <label for="email">E-mail (o material chega aqui)</label>
           <input id="email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" required>
-          <label for="cpf">CPF</label>
+          <label for="cpf">CPF <span style="font-weight:400;color:var(--suave)">(o Asaas exige para emitir a cobrança)</span></label>
           <input id="cpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" maxlength="14" placeholder="000.000.000-00" required aria-describedby="cpf-aviso">
           <p id="cpf-aviso" class="campo-aviso" aria-live="polite"></p>
           <div class="hp" aria-hidden="true"><label for="site">Site</label><input id="site" name="site" type="text" tabindex="-1" autocomplete="off"></div>
@@ -409,6 +455,7 @@
 
         <div id="pagar" hidden>
           <div class="pix">
+            <p class="passo">Passo 2 de 2 · pagamento</p>
             <p class="ok-titulo" style="color:var(--preto)">Pague com Pix</p>
             <img id="qr" alt="QR Code do Pix">
             <div class="copia"><input id="copiaecola" readonly aria-label="Código Pix copia e cola"><button id="copiar" type="button">Copiar</button></div>
@@ -429,7 +476,7 @@
           <div id="msg3" class="msg" role="status" aria-live="polite"></div>
         </div>
 
-        <details id="ja-comprei" style="margin:18px 0 0" hidden>
+        <details id="ja-comprei" style="margin:18px 0 0">
           <summary>Já comprei e preciso do link de novo</summary>
           <form id="form-reenvio" novalidate style="margin-top:10px">
             <input id="email-reenvio" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" placeholder="E-mail usado na compra">
@@ -441,6 +488,11 @@
     </div>
   </div>
 </section>
+
+<div id="barra-fixa" class="barra-fixa">
+  <span><b>R$ 67,00</b>ou 6x de R$ 11,16 sem juros</span>
+  <a class="btn" href="#comprar">Compre aqui</a>
+</div>
 
 <footer class="rodape">
   <div class="largura">
@@ -499,11 +551,34 @@
       de.hidden = false;
     }
   }
-  if (vendaAberta) {
-    document.getElementById("faixa-previa").hidden = true;
-    document.getElementById("previa").hidden = true;
-    form.hidden = false;
-    document.getElementById("ja-comprei").hidden = false;
+  if (!vendaAberta) {
+    document.getElementById("faixa-previa").hidden = false;
+    document.getElementById("previa").hidden = false;
+    form.hidden = true;
+    document.getElementById("ja-comprei").hidden = true;
+    document.getElementById("barra-fixa").hidden = true;
+  }
+
+  // Contador anônimo do funil: só soma +1 por dia, página, evento e origem. Sem cookies, sem IP, sem dado pessoal.
+  var FUNIL = "https://xhqzakikatookphvjewy.supabase.co/functions/v1/iacomton-funil", contados = {};
+  function contar(e) {
+    if (contados[e] || navigator.webdriver) return;
+    contados[e] = 1;
+    try { fetch(FUNIL, { method: "POST", keepalive: true, headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ p: AULA, e: e, o: origem }) }).catch(function () {}); } catch (x) {}
+  }
+  contar("visita");
+  window.addEventListener("scroll", function () {
+    if (!contados.meio && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight * 0.5) contar("meio");
+  }, { passive: true });
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="#comprar"]'), function (a) {
+    a.addEventListener("click", function () { contar("clique_cta"); });
+  });
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      var visivel = es[0].isIntersecting;
+      if (visivel) contar("viu_compra");
+      if (vendaAberta) document.getElementById("barra-fixa").hidden = visivel;
+    }, { threshold: 0.05 }).observe(document.getElementById("comprar"));
   }
 
   // Parcelas no cartão (até 6x sem juros). O Asaas divide o total e põe a diferença dos centavos na última parcela.
@@ -652,6 +727,7 @@
     if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(email)) { mostrar(msg, "erro", "Confira o e-mail."); form.email.focus(); return; }
     if (!cpfValido(cpf)) { campoCpf.setAttribute("aria-invalid", "true"); document.getElementById("cpf-aviso").textContent = "Confira o CPF."; campoCpf.focus(); return; }
     if (!form.termos.checked) { mostrar(msg, "erro", "Para continuar, aceite os Termos de compra."); return; }
+    contar("envio_form");
     botao.disabled = true; botao.textContent = "Gerando o pagamento…";
     fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ acao: "criar", aula: AULA, nome: nome, email: email, cpf: cpf, origem: origem, campanha: campanha, consent_ads: aceitouCookies(), site: form.site.value }) })
@@ -665,6 +741,7 @@
         document.getElementById("copiaecola").value = (j.pix && j.pix.copiaecola) || "";
         semPix(!(j.pix && j.pix.copiaecola));
         irPara("pagar");
+        contar("pagamento_aberto");
         evento("InitiateCheckout");
         acompanhar();
       }).catch(function (err) {
