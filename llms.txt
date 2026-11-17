@@ -1,0 +1,34 @@
+# IA com Ton
+
+> IA com Ton ensina inteligência artificial na prática para iniciantes e empreendedores brasileiros: aulas grátis em PDF e guias pagos com prompts prontos para ChatGPT, Claude e outras ferramentas. Conteúdo em português do Brasil. Material educativo independente, sem vínculo com OpenAI, Anthropic, Google ou iFood.
+
+Site: https://iacomton.com.br
+Instagram: https://www.instagram.com/iacomton/
+YouTube: https://www.youtube.com/channel/UCeNp02Uo-C1ax9mjizgqTrA
+Contato: contato@iacomton.com.br
+
+## Aulas grátis (PDF enviado por e-mail)
+
+- [Organize seus arquivos com IA](https://iacomton.com.br/aulas/drive.html): Google Drive + ChatGPT para organizar arquivos, passo a passo, com prompts.
+- [ChatGPT no Chrome](https://iacomton.com.br/aulas/chrome.html): como conectar a extensão do ChatGPT ao Chrome e 5 usos com prompts prontos.
+- [MCP, Skills e A2A](https://iacomton.com.br/aulas/agentes.html): o que são, quando usar cada um e os cuidados de segurança.
+- [4 ferramentas para criar seu app com IA](https://iacomton.com.br/aulas/software.html): o papel de Claude Code, GitHub, Supabase e Vercel.
+- [Fotos de cardápio com o ChatGPT](https://iacomton.com.br/aulas/cardapio.html): como tirar a foto do prato no celular e 3 atalhos para luz, cores e fundo.
+
+## Guias pagos (compra única, sem assinatura, reembolso em até 7 dias)
+
+- [Agenda Fácil: do zero ao seu primeiro aplicativo com IA](https://iacomton.com.br/aulas/agenda-facil.html): manual em PDF de 49 páginas, 36 prompts e o código-fonte de um app de agendamento, para aprender Claude Code, GitHub, Supabase e Vercel. R$ 67,00.
+- [Atalhos GPT para Edição de Fotos de Cardápio](https://iacomton.com.br/aulas/atalhos-gpt-fotos-cardapio.html): guia em PDF de 13 páginas com 18 atalhos e a configuração para Projetos do ChatGPT, para restaurantes, lanchonetes e delivery. R$ 29,90.
+- [Atalhos GPT para Edição de Fotos de Produtos](https://iacomton.com.br/aulas/atalhos-gpt-fotos-produtos.html): guia em PDF de 13 páginas com 18 atalhos para fotos de loja virtual e marketplace. R$ 29,90.
+- [Coleção Atalhos GPT](https://iacomton.com.br/aulas/colecao-atalhos-gpt.html): catálogo dos guias por segmento.
+
+## Observações
+
+- Os atalhos (como /ifood ou /gourmet) são convenções criadas pelo IA com Ton, ativadas pelas Instruções de um Projeto do ChatGPT. Não são comandos nativos do ChatGPT nem ferramentas oficiais do iFood.
+- Os exemplos de antes e depois nas páginas são ilustrativos, gerados com IA.
+- Os guias não prometem renda, vendas ou resultado garantido.
+
+## Páginas legais
+
+- [Termos de uso e de compra](https://iacomton.com.br/termos.html)
+- [Política de Privacidade](https://iacomton.com.br/privacidade.html)
