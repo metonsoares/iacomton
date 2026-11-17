@@ -15,6 +15,12 @@ Contato: contato@iacomton.com.br
 - [4 ferramentas para criar seu app com IA](https://iacomton.com.br/aulas/software.html): o papel de Claude Code, GitHub, Supabase e Vercel.
 - [Fotos de cardápio com o ChatGPT](https://iacomton.com.br/aulas/cardapio.html): como tirar a foto do prato no celular e 3 atalhos para luz, cores e fundo.
 
+## Dicas (artigos com passo a passo)
+
+- [Como tirar foto de comida para o iFood com o celular](https://iacomton.com.br/dicas/foto-de-comida-para-ifood.html): luz, ângulo, fundo e o que conferir antes de publicar.
+- [Como editar foto de cardápio com o ChatGPT](https://iacomton.com.br/dicas/editar-foto-de-cardapio-com-chatgpt.html): como pedir correção de luz, cor e fundo sem mudar a comida.
+- [Como melhorar fotos de produtos para loja virtual com o ChatGPT](https://iacomton.com.br/dicas/fotos-de-produtos-com-chatgpt.html): fotografar com o celular e pedir ajustes sem alterar o produto.
+
 ## Guias pagos (compra única, sem assinatura, reembolso em até 7 dias)
 
 - [Agenda Fácil: do zero ao seu primeiro aplicativo com IA](https://iacomton.com.br/aulas/agenda-facil.html): manual em PDF de 49 páginas, 36 prompts e o código-fonte de um app de agendamento, para aprender Claude Code, GitHub, Supabase e Vercel. R$ 67,00.
