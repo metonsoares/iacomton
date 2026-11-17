@@ -121,6 +121,7 @@
     .grade3{grid-template-columns:1fr}
     h1{font-size:36px}
   }
+  .barra-fixa{display:none}
   @media (max-width:600px){
     .grade2,.grade4{grid-template-columns:1fr}
     h1{font-size:31px}
@@ -128,7 +129,14 @@
     section{padding:44px 0}
     .compra{padding:22px 16px}
     .btn{width:100%}
+    body{padding-bottom:76px}
+    .barra-fixa{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--preto);color:#fff;padding:10px 14px;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 -6px 20px rgba(0,0,0,.3)}
+    .barra-fixa[hidden]{display:none}
+    .barra-fixa span{font-size:13px;line-height:1.25;color:#EADFD5}
+    .barra-fixa b{display:block;color:#fff;font-size:17px}
+    .barra-fixa .btn{width:auto;padding:12px 18px;font-size:16px;flex:none}
   }
+  .passo{font-size:13px;font-weight:800;color:var(--terra);letter-spacing:.5px;text-transform:uppercase;margin:0 0 2px}
   .grade5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
   code{font:600 .92em Consolas,"Courier New",monospace;background:#FBE9DD;color:#8A3F22;padding:1px 6px;border-radius:6px}
   .paginas{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
@@ -142,7 +150,7 @@
 </head>
 <body>
 
-<div id="faixa-previa" class="faixa-previa">Página em preparação: as vendas ainda não estão abertas.</div>
+<div id="faixa-previa" class="faixa-previa" hidden>Página em preparação: as vendas ainda não estão abertas.</div>
 
 <!-- 1. Título -->
 <header class="topo">
@@ -301,12 +309,14 @@
         <p class="preco" id="preco">R$ 29,90</p>
         <p class="preco-nota" id="preco-nota">Pagamento único, sem mensalidade. Pix ou cartão de crédito à vista.</p>
 
-        <div id="previa">
+        <div id="previa" hidden>
           <button class="btn" type="button" disabled aria-disabled="true">Comprar guia por R$ 29,90</button>
           <p class="seguro">Vendas ainda não abertas.</p>
         </div>
 
-        <form id="form" novalidate hidden>
+        <form id="form" novalidate>
+          <p class="passo">Passo 1 de 2 · seus dados</p>
+          <p class="dica" style="margin:0 0 4px">No passo 2 você escolhe Pix ou cartão. Você só paga lá.</p>
           <label for="nome">Nome completo</label>
           <input id="nome" name="nome" type="text" autocomplete="name" maxlength="80" required>
           <label for="email">E-mail (o material chega aqui)</label>
@@ -342,7 +352,7 @@
           <div id="msg3" class="msg" role="status" aria-live="polite"></div>
         </div>
 
-        <details id="ja-comprei" style="margin:18px 0 0" hidden>
+        <details id="ja-comprei" style="margin:18px 0 0">
           <summary>Já comprei e preciso do link de novo</summary>
           <form id="form-reenvio" novalidate style="margin-top:10px">
             <input id="email-reenvio" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" placeholder="E-mail usado na compra">
@@ -354,6 +364,11 @@
     </div>
   </div>
 </section>
+
+<div id="barra-fixa" class="barra-fixa">
+  <span><b>R$ 29,90</b>pagamento único · Pix ou cartão</span>
+  <a class="btn" href="#comprar">Comprar</a>
+</div>
 
 <footer class="rodape">
   <div class="largura">
@@ -390,11 +405,34 @@
   var pedido = null, chave = null, timer = null;
 
   var vendaAberta = !MODO_PREVIA && typeof PRECO === "number" && PRECO > 0;
-  if (vendaAberta) {
-    document.getElementById("faixa-previa").hidden = true;
-    document.getElementById("previa").hidden = true;
-    form.hidden = false;
-    document.getElementById("ja-comprei").hidden = false;
+  if (!vendaAberta) {
+    document.getElementById("faixa-previa").hidden = false;
+    document.getElementById("previa").hidden = false;
+    form.hidden = true;
+    document.getElementById("ja-comprei").hidden = true;
+    document.getElementById("barra-fixa").hidden = true;
+  }
+
+  // Contador anônimo do funil: só soma +1 por dia, página, evento e origem. Sem cookies, sem IP, sem dado pessoal.
+  var FUNIL = "https://xhqzakikatookphvjewy.supabase.co/functions/v1/iacomton-funil", contados = {};
+  function contar(e) {
+    if (contados[e] || navigator.webdriver) return;
+    contados[e] = 1;
+    try { fetch(FUNIL, { method: "POST", keepalive: true, headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ p: AULA, e: e, o: origem }) }).catch(function () {}); } catch (x) {}
+  }
+  contar("visita");
+  window.addEventListener("scroll", function () {
+    if (!contados.meio && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight * 0.5) contar("meio");
+  }, { passive: true });
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="#comprar"]'), function (a) {
+    a.addEventListener("click", function () { contar("clique_cta"); });
+  });
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      var visivel = es[0].isIntersecting;
+      if (visivel) contar("viu_compra");
+      if (vendaAberta) document.getElementById("barra-fixa").hidden = visivel;
+    }, { threshold: 0.05 }).observe(document.getElementById("comprar"));
   }
 
   function mostrar(el, tipo, texto) { el.className = "msg " + tipo; el.textContent = texto; }
@@ -534,6 +572,7 @@
     if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(email)) { mostrar(msg, "erro", "Confira o e-mail."); form.email.focus(); return; }
     if (!cpfValido(cpf)) { campoCpf.setAttribute("aria-invalid", "true"); document.getElementById("cpf-aviso").textContent = "Confira o CPF."; campoCpf.focus(); return; }
     if (!form.termos.checked) { mostrar(msg, "erro", "Para continuar, aceite os Termos de compra."); return; }
+    contar("envio_form");
     botao.disabled = true; botao.textContent = "Gerando o pagamento…";
     fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ acao: "criar", aula: AULA, nome: nome, email: email, cpf: cpf, origem: origem, campanha: campanha, consent_ads: aceitouCookies(), site: form.site.value }) })
@@ -547,6 +586,7 @@
         document.getElementById("copiaecola").value = (j.pix && j.pix.copiaecola) || "";
         semPix(!(j.pix && j.pix.copiaecola));
         irPara("pagar");
+        contar("pagamento_aberto");
         evento("InitiateCheckout");
         acompanhar();
       }).catch(function (err) {
